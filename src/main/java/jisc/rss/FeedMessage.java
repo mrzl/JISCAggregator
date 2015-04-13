@@ -2,6 +2,8 @@ package jisc.rss;
 
 /**
  * Created by mrzl on 13.04.2015.
+ *
+ * An instance of this object contains all information that was retrieved about one RSS feed
  */
 public class FeedMessage {
 
