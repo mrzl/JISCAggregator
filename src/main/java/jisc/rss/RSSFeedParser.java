@@ -28,15 +28,15 @@ public class RSSFeedParser {
 
     final URL url;
 
-    public RSSFeedParser(String feedUrl) {
+    public RSSFeedParser ( String feedUrl ) {
         try {
-            this.url = new URL(feedUrl);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            this.url = new URL( feedUrl );
+        } catch ( MalformedURLException e ) {
+            throw new RuntimeException( e );
         }
     }
 
-    public Feed readFeed() {
+    public Feed readFeed () {
         Feed feed = null;
         try {
             boolean isFeedHeader = true;
@@ -51,86 +51,85 @@ public class RSSFeedParser {
             String guid = "";
 
             // First create a new XMLInputFactory
-            XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+            XMLInputFactory inputFactory = XMLInputFactory.newInstance( );
             // Setup a new eventReader
-            InputStream in = read();
-            XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
+            InputStream in = read( );
+            XMLEventReader eventReader = inputFactory.createXMLEventReader( in );
             // read the XML document
-            while (eventReader.hasNext()) {
-                XMLEvent event = eventReader.nextEvent();
-                if (event.isStartElement()) {
-                    String localPart = event.asStartElement().getName()
-                            .getLocalPart();
-                    System.out.println(localPart );
-                    switch (localPart) {
+            while ( eventReader.hasNext( ) ) {
+                XMLEvent event = eventReader.nextEvent( );
+                if ( event.isStartElement( ) ) {
+                    String localPart = event.asStartElement( ).getName( )
+                            .getLocalPart( );
+                    switch ( localPart ) {
                         case ITEM:
-                            if (isFeedHeader) {
+                            if ( isFeedHeader ) {
                                 isFeedHeader = false;
-                                feed = new Feed(title, link, description, language,
-                                        copyright, pubdate);
+                                feed = new Feed( title, link, description, language,
+                                        copyright, pubdate );
                             }
-                            event = eventReader.nextEvent();
+                            event = eventReader.nextEvent( );
                             break;
                         case TITLE:
-                            title = getCharacterData(event, eventReader);
+                            title = getCharacterData( event, eventReader );
                             break;
                         case DESCRIPTION:
-                            description = getCharacterData(event, eventReader);
+                            description = getCharacterData( event, eventReader );
                             break;
                         case LINK:
-                            link = getCharacterData(event, eventReader);
+                            link = getCharacterData( event, eventReader );
                             break;
                         case GUID:
-                            guid = getCharacterData(event, eventReader);
+                            guid = getCharacterData( event, eventReader );
                             break;
                         case LANGUAGE:
-                            language = getCharacterData(event, eventReader);
+                            language = getCharacterData( event, eventReader );
                             break;
                         case AUTHOR:
-                            author = getCharacterData(event, eventReader);
+                            author = getCharacterData( event, eventReader );
                             break;
                         case PUB_DATE:
-                            pubdate = getCharacterData(event, eventReader);
+                            pubdate = getCharacterData( event, eventReader );
                             break;
                         case COPYRIGHT:
-                            copyright = getCharacterData(event, eventReader);
+                            copyright = getCharacterData( event, eventReader );
                             break;
                     }
-                } else if (event.isEndElement()) {
-                    if (event.asEndElement().getName().getLocalPart() == (ITEM)) {
-                        FeedMessage message = new FeedMessage();
-                        message.setAuthor(author);
-                        message.setDescription(description);
-                        message.setGuid(guid);
-                        message.setLink(link);
-                        message.setTitle(title);
-                        feed.getMessages().add(message);
-                        event = eventReader.nextEvent();
+                } else if ( event.isEndElement( ) ) {
+                    if ( event.asEndElement( ).getName( ).getLocalPart( ) == ( ITEM ) ) {
+                        FeedMessage message = new FeedMessage( );
+                        message.setAuthor( author );
+                        message.setDescription( description );
+                        message.setGuid( guid );
+                        message.setLink( link );
+                        message.setTitle( title );
+                        feed.getMessages( ).add( message );
+                        event = eventReader.nextEvent( );
                         continue;
                     }
                 }
             }
-        } catch (XMLStreamException e) {
-            throw new RuntimeException(e);
+        } catch ( XMLStreamException e ) {
+            throw new RuntimeException( e );
         }
         return feed;
     }
 
-    private String getCharacterData(XMLEvent event, XMLEventReader eventReader)
+    private String getCharacterData ( XMLEvent event, XMLEventReader eventReader )
             throws XMLStreamException {
         String result = "";
-        event = eventReader.nextEvent();
-        if (event instanceof Characters) {
-            result = event.asCharacters().getData();
+        event = eventReader.nextEvent( );
+        if ( event instanceof Characters ) {
+            result = event.asCharacters( ).getData( );
         }
         return result;
     }
 
-    private InputStream read() {
+    private InputStream read () {
         try {
-            return url.openStream();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            return url.openStream( );
+        } catch ( IOException e ) {
+            throw new RuntimeException( e );
         }
     }
 }

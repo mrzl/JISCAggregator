@@ -15,10 +15,10 @@ public class Feed {
     final String copyright;
     final String pubDate;
 
-    final List<FeedMessage> entries = new ArrayList<FeedMessage>();
+    final List< FeedMessage > entries = new ArrayList<>( );
 
-    public Feed(String title, String link, String description, String language,
-                String copyright, String pubDate) {
+    public Feed ( String title, String link, String description, String language,
+                  String copyright, String pubDate ) {
         this.title = title;
         this.link = link;
         this.description = description;
@@ -27,39 +27,39 @@ public class Feed {
         this.pubDate = pubDate;
     }
 
-    public List<FeedMessage> getMessages() {
+    public List< FeedMessage > getMessages () {
         return entries;
     }
 
-    public String getTitle() {
+    public String getTitle () {
         return title;
     }
 
-    public String getLink() {
+    public String getLink () {
         return link;
     }
 
-    public String getDescription() {
+    public String getDescription () {
         return description;
     }
 
-    public String getLanguage() {
+    public String getLanguage () {
         return language;
     }
 
-    public String getCopyright() {
+    public String getCopyright () {
         return copyright;
     }
 
-    public String getPubDate() {
+    public String getPubDate () {
         return pubDate;
     }
 
     @Override
-    public String toString() {
-        return "Feed [copyright=" + copyright + ", description=" + description
-                + ", language=" + language + ", link=" + link + ", pubDate="
-                + pubDate + ", title=" + title + "]";
+    public String toString () {
+        return "Feed [copyright=" + getCopyright() + ", description=" + getDescription()
+                + ", language=" + getLanguage() + ", link=" + getLink() + ", pubDate="
+                + getPubDate() + ", title=" + getTitle() + "]";
     }
 
 }
