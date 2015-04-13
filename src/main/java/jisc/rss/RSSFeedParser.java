@@ -61,6 +61,7 @@ public class RSSFeedParser {
                 if (event.isStartElement()) {
                     String localPart = event.asStartElement().getName()
                             .getLocalPart();
+                    System.out.println(localPart );
                     switch (localPart) {
                         case ITEM:
                             if (isFeedHeader) {

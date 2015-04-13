@@ -23,7 +23,7 @@ public class ReadTest {
     public void testNetworkingEventsLondon() {
         RSSFeedParser parser = new RSSFeedParser("http://feeds2.feedburner.com/Networking-Events-In-London");
         Feed feed = parser.readFeed();
-        //printFeed( feed );
+        printFeed( feed );
         assertTrue( feed.getMessages().size() > 0 );
     }
 
