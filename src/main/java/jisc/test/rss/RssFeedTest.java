@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 /**
  * Created by mrzl on 13.04.2015.
  */
-public class ReadTest {
+public class RssFeedTest {
 
     @org.junit.Test
     public void testRead() {
