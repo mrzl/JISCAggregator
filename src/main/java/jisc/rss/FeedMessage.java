@@ -1,5 +1,7 @@
 package jisc.rss;
 
+import java.util.Date;
+
 /**
  * Created by mrzl on 13.04.2015.
  *
@@ -12,6 +14,7 @@ public class FeedMessage {
     String link;
     String author;
     String guid;
+    Date date;
 
     public String getTitle() {
         return title;
@@ -53,11 +56,18 @@ public class FeedMessage {
         this.guid = guid;
     }
 
+    public Date getDate () {
+        return date;
+    }
+
+    public void setDate( Date _date ) {
+        this.date = _date;
+    }
+
     @Override
     public String toString() {
         return "FeedMessage [title=" + title + ", description=" + description
-                + ", link=" + link + ", author=" + author + ", guid=" + guid
+                + ", link=" + link + ", author=" + author + ", date: " + date + ", guid=" + guid
                 + "]";
     }
-
 }

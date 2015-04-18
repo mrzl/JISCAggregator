@@ -30,10 +30,16 @@ public class EventContainer {
     public void addEvent( Event _event, EventSource _origin ){
         // if the event source doesn't exist in the map yet, create it.
         if( !this.events.containsKey( _origin ) ) {
-            events.put( _origin, new ArrayList<>( ) );
+            this.events.put( _origin, new ArrayList<>( ) );
         }
 
         this.events.get( _origin ).add( _event );
+    }
+
+    public void addEvents( ArrayList< Event > _events, EventSource _origin ) {
+        for( Event e : _events ) {
+            addEvent( e, _origin );
+        }
     }
 
     /**

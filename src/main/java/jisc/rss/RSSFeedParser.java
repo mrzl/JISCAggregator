@@ -4,6 +4,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
@@ -44,6 +50,7 @@ public class RSSFeedParser {
             String description = "";
             String title = "";
             String link = "";
+            Date date = null;
             String language = "";
             String copyright = "";
             String author = "";
@@ -65,6 +72,7 @@ public class RSSFeedParser {
                         case ITEM:
                             if ( isFeedHeader ) {
                                 isFeedHeader = false;
+
                                 feed = new Feed( title, link, description, language,
                                         copyright, pubdate );
                             }
@@ -72,6 +80,22 @@ public class RSSFeedParser {
                             break;
                         case TITLE:
                             title = getCharacterData( event, eventReader );
+
+                            Pattern pattern = Pattern.compile( "... \\d\\d ... \\d\\d\\d\\d" );
+                            Matcher matcher = pattern.matcher( title );
+                            if (matcher.find())
+                            {
+                                String extractedDateString = matcher.group( 0 );
+                                try {
+                                    //System.out.println( title );
+                                    Date result = new SimpleDateFormat( "EEE dd MMM yyyy", Locale.ENGLISH ).parse( extractedDateString );
+                                    //System.out.println( "date parse: " + result );
+                                    date = result;
+                                } catch ( ParseException e ) {
+                                    e.printStackTrace( );
+                                }
+                            }
+
                             break;
                         case DESCRIPTION:
                             description = getCharacterData( event, eventReader );
@@ -103,6 +127,7 @@ public class RSSFeedParser {
                         message.setGuid( guid );
                         message.setLink( link );
                         message.setTitle( title );
+                        message.setDate( date );
                         feed.getMessages( ).add( message );
                         event = eventReader.nextEvent( );
                         continue;

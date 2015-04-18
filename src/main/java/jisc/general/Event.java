@@ -1,5 +1,7 @@
 package jisc.general;
 
+import java.util.Date;
+
 /**
  * Created by mrzl on 13.04.2015.
  *
@@ -10,6 +12,7 @@ public class Event {
     private String description;
     private String url;
     private String author;
+    private Date date;
 
     /**
      * Via the constructor all fields are initialized
@@ -19,10 +22,11 @@ public class Event {
      * @param _url the url to the event
      * @param _author the author of the event
      */
-    public Event( String _title, String _description, String _url, String _author ) {
+    public Event( String _title, String _description, String _url, Date _date, String _author ) {
         this.title = _title;
         this.description = _description;
         this.url = _url;
+        this.date = _date;
         this.author = _author;
     }
 
@@ -48,6 +52,13 @@ public class Event {
     }
 
     /**
+     * @return The date when the event will happen
+     */
+    public Date getDate () {
+        return date;
+    }
+
+    /**
      * @return The author of the event
      */
     public String getAuthor () {
@@ -56,6 +67,6 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event [title=" + getTitle() + " description=" + getDescription() + " author=" + getAuthor() + " url=" + getUrl( ) + "]";
+        return "Event [\ntitle=" + getTitle( ) + " \ndescription=" + getDescription( ) + " \nauthor=" + getAuthor() + " \ndate=" + getDate() + " \nurl=" + getUrl( ) + "]";
     }
 }
