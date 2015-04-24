@@ -1,4 +1,4 @@
-package jisc.general;
+package jisc.event;
 
 /**
  * Created by mrzl on 13.04.2015.

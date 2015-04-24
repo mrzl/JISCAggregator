@@ -1,7 +1,7 @@
 package jisc.test.rss;
 
 
-import jisc.general.EventSource;
+import jisc.event.EventSource;
 import jisc.htmlparse.JciEventsHtmlParser;
 
 import static org.junit.Assert.assertTrue;

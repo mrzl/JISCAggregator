@@ -1,7 +1,7 @@
 package jisc.htmlparse;
 
-import jisc.general.Event;
-import jisc.general.EventSource;
+import jisc.event.Event;
+import jisc.event.EventSource;
 
 import java.util.ArrayList;
 

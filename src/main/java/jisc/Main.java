@@ -1,8 +1,8 @@
 package jisc;
 
-import jisc.general.Event;
-import jisc.general.EventContainer;
-import jisc.general.EventSource;
+import jisc.event.Event;
+import jisc.event.EventContainer;
+import jisc.event.EventSource;
 import jisc.htmlparse.JciEventsHtmlParser;
 import jisc.output.ConsoleOutput;
 import jisc.rss.Feed;

@@ -1,4 +1,4 @@
-package jisc.general;
+package jisc.event;
 
 import java.util.Date;
 

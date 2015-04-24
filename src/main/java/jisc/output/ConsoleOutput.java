@@ -1,8 +1,8 @@
 package jisc.output;
 
-import jisc.general.Event;
-import jisc.general.EventContainer;
-import jisc.general.EventSource;
+import jisc.event.Event;
+import jisc.event.EventContainer;
+import jisc.event.EventSource;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,7 @@ public class ConsoleOutput {
         System.out.println( "Events of " + _source );
         try {
             ArrayList< Event > eventsNetworkingEventsLondon = ( ArrayList< Event > ) _container.getEvents( _source );
-            for( Event e : eventsNetworkingEventsLondon ) {
-                System.out.println( e );
-            }
+            eventsNetworkingEventsLondon.forEach( System.out::println );
         } catch ( Exception e ) {
             e.printStackTrace( );
         }

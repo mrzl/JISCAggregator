@@ -1,4 +1,4 @@
-package jisc.general;
+package jisc.event;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * Created by mrzl on 13.04.2015.
  *
- * The @link{jisc.general.EventContainer} is the main container for all events. This is where all events are collected
+ * The @link{jisc.event.EventContainer} is the main container for all events. This is where all events are collected
  * in relation to their @link{jisc.general.EventOrigin}.
  */
 public class EventContainer {
@@ -45,7 +45,7 @@ public class EventContainer {
      * Adds multiple events
      *
      * @param _events a @link{java.util.ArrayList} that contains the events being added
-     * @param _origin the @link[jisc.general.EventSource} the events are in relation to
+     * @param _origin the @link[jisc.event.EventSource} the events are in relation to
      */
     public void addEvents( ArrayList< Event > _events, EventSource _origin ) {
         this.logger.entering( getClass().getName(), "addEvents" );
@@ -56,11 +56,11 @@ public class EventContainer {
     }
 
     /**
-     * Returns all Events associated with a given @link{jisc.general.EventSource} instance.
+     * Returns all Events associated with a given @link{jisc.event.EventSource} instance.
      *
-     * @param _origin The @link{jisc.general.EventSource} this function returns all associated events of
-     * @return Returns a list of all Events associated with the passed @link{jisc.general.EventSource}
-     * @throws Exception Throws an Exception if the passed @link{jisc.general.EventSource} doesn't exist in this container
+     * @param _origin The @link{jisc.event.EventSource} this function returns all associated events of
+     * @return Returns a list of all Events associated with the passed @link{jisc.event.EventSource}
+     * @throws Exception Throws an Exception if the passed @link{jisc.event.EventSource} doesn't exist in this container
      */
     public List<Event> getEvents( EventSource _origin ) throws Exception {
         // whenever the given event source doesn't exist, throw an error
