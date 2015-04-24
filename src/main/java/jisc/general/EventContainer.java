@@ -3,6 +3,7 @@ package jisc.general;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
  * in relation to their @link{jisc.general.EventOrigin}.
  */
 public class EventContainer {
+    private static final Logger logger = Logger.getLogger( EventContainer.class.getName() );
     private HashMap< EventSource, List< Event > > events;
 
     /**
@@ -28,18 +30,29 @@ public class EventContainer {
      * @param _origin The source of the event
      */
     public void addEvent( Event _event, EventSource _origin ){
+        this.logger.entering( getClass().getName(), "addEvent" );
         // if the event source doesn't exist in the map yet, create it.
         if( !this.events.containsKey( _origin ) ) {
             this.events.put( _origin, new ArrayList<>( ) );
+            this.logger.info( "The event origin " + _origin + " did not exist yet, it was added to the event HashMap." );
         }
 
         this.events.get( _origin ).add( _event );
+        this.logger.exiting( getClass().getName(), "addEvent" );
     }
 
+    /**
+     * Adds multiple events
+     *
+     * @param _events a @link{java.util.ArrayList} that contains the events being added
+     * @param _origin the @link[jisc.general.EventSource} the events are in relation to
+     */
     public void addEvents( ArrayList< Event > _events, EventSource _origin ) {
+        this.logger.entering( getClass().getName(), "addEvents" );
         for( Event e : _events ) {
-            addEvent( e, _origin );
+            this.addEvent( e, _origin );
         }
+        this.logger.exiting( getClass().getName(), "addEvents" );
     }
 
     /**
@@ -52,7 +65,9 @@ public class EventContainer {
     public List<Event> getEvents( EventSource _origin ) throws Exception {
         // whenever the given event source doesn't exist, throw an error
         if( !this.events.containsKey( _origin ) ) {
-            throw new Exception( "Couldn't get events of " + _origin );
+            String errorMessage = "There are no events in association to the passed EventSource" + _origin;
+            this.logger.severe( errorMessage );
+            throw new Exception( errorMessage );
         } else {
             return this.events.get( _origin );
         }
