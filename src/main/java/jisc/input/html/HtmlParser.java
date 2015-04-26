@@ -1,4 +1,4 @@
-package jisc.htmlparse;
+package jisc.input.html;
 
 import jisc.event.Event;
 import jisc.event.EventSource;

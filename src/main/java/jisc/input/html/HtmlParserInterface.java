@@ -1,4 +1,4 @@
-package jisc.htmlparse;
+package jisc.input.html;
 
 /**
  * Created by mrzl on 18.04.2015.

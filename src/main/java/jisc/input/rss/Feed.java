@@ -1,4 +1,4 @@
-package jisc.rss;
+package jisc.input.rss;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,14 +8,13 @@ import java.util.List;
  */
 public class Feed {
 
-    final String title;
-    final String link;
-    final String description;
-    final String language;
-    final String copyright;
-    final String pubDate;
-
-    final List< FeedMessage > entries = new ArrayList<>( );
+    private String title;
+    private String link;
+    private String description;
+    private String language;
+    private String copyright;
+    private String pubDate;
+    private List< FeedMessage > entries = new ArrayList<>( );
 
     public Feed ( String title, String link, String description, String language,
                   String copyright, String pubDate ) {

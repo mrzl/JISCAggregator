@@ -1,7 +1,7 @@
-package jisc.test.rss;
+package rss;
 
-import jisc.rss.Feed;
-import jisc.rss.RSSFeedParser;
+import jisc.input.rss.Feed;
+import jisc.input.rss.RSSFeedParser;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +14,8 @@ public class RssFeedTest {
     @org.junit.Test
     public void testNetworkingEventsLondon() {
         RSSFeedParser parser = new RSSFeedParser("http://feeds2.feedburner.com/Networking-Events-In-London");
-        Feed feed = parser.readFeed();
+        parser.parse();
+        Feed feed = parser.getParsedFeed( );
         printFeed( feed );
         assertTrue( feed.getMessages().size() > 0 );
     }

@@ -1,4 +1,4 @@
-package jisc.htmlparse;
+package jisc.input.html;
 
 import jisc.event.Event;
 import jisc.event.EventSource;
@@ -204,7 +204,7 @@ public class JciEventsHtmlParser extends HtmlParser implements HtmlParserInterfa
             Element _element = _eventDiv.get( eventNumber ).select( "div.event_type_details tbody" ).first( ).children( ).get( 3 ).child( 1 );
             eventPrice = _element.html( );
         } catch ( Exception e ) {
-            this.logger.severe( "Couldn't load the event price from event nr: " + eventNumber );
+            this.logger.warning( "Couldn't load the event price from event nr: " + eventNumber );
             //this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
         }
 

@@ -1,37 +1,36 @@
 package jisc;
 
-import jisc.event.Event;
 import jisc.event.EventContainer;
 import jisc.event.EventSource;
-import jisc.htmlparse.JciEventsHtmlParser;
-import jisc.output.ConsoleOutput;
-import jisc.rss.Feed;
-import jisc.rss.FeedMessage;
-import jisc.rss.RSSFeedParser;
+import jisc.input.html.JciEventsHtmlParser;
+import jisc.misc.HelperMethods;
+import jisc.input.rss.RSSFeedParser;
+
+import java.util.logging.*;
 
 /**
  * Created by mrzl on 13.04.2015.
  */
 public class Main {
     public static void main ( String[] args ) {
-        EventContainer container = new EventContainer();
+        HelperMethods.setGlobalLogLevel( Level.SEVERE );
+
+        EventContainer container = new EventContainer( );
 
         EventSource networkingEventsLondon = new EventSource( "Networking Events London", "http://feeds2.feedburner.com/Networking-Events-In-London" );
         //EventSource jciLondon = new EventSource( "JCI London", "http://www.jcilondon.org.uk/events/index.html" );
 
-        RSSFeedParser parser = new RSSFeedParser( networkingEventsLondon.getUrl( ) );
-        Feed feed = parser.readFeed();
+        RSSFeedParser nelRssParser = new RSSFeedParser( networkingEventsLondon.getUrl( ) );
+        nelRssParser.parse( );
+        container.addEvents( nelRssParser.getEvents( ), networkingEventsLondon );
 
-        for( FeedMessage m : feed.getMessages() ) {
-            Event e = new Event( m.getTitle(), m.getDescription(), m.getLink(), m.getDate(), m.getAuthor() );
-            container.addEvent( e, networkingEventsLondon );
-        }
+        JciEventsHtmlParser jciEventsHtmlParser = new JciEventsHtmlParser( );
+        jciEventsHtmlParser.parse( );
+        container.addEvents( jciEventsHtmlParser.getEvents( ), jciEventsHtmlParser.getEventSource( ) );
 
-        JciEventsHtmlParser jciEventsHtmlParser = new JciEventsHtmlParser();
-        jciEventsHtmlParser.parse();
-        container.addEvents( jciEventsHtmlParser.getEvents(), jciEventsHtmlParser.getEventSource() );
-
-        ConsoleOutput.printEvents( container, networkingEventsLondon );
-        ConsoleOutput.printEvents( container, jciEventsHtmlParser.getEventSource());
+        //HelperMethods.printEvents( container, networkingEventsLondon );
+        //HelperMethods.printEvents( container, jciEventsHtmlParser.getEventSource());
     }
+
+
 }

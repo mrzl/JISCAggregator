@@ -1,4 +1,4 @@
-package jisc.rss;
+package jisc.input.rss;
 
 import java.util.Date;
 

@@ -1,4 +1,6 @@
-package jisc.rss;
+package jisc.input.rss;
+
+import jisc.event.Event;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -32,9 +35,13 @@ public class RSSFeedParser {
     static final String PUB_DATE = "pubDate";
     static final String GUID = "guid";
 
-    final URL url;
+    private URL url;
+
+    private Feed currentFeed;
 
     public RSSFeedParser ( String feedUrl ) {
+
+        this.currentFeed = null;
         try {
             this.url = new URL( feedUrl );
         } catch ( MalformedURLException e ) {
@@ -42,8 +49,7 @@ public class RSSFeedParser {
         }
     }
 
-    public Feed readFeed () {
-        Feed feed = null;
+    public void parse () {
         try {
             boolean isFeedHeader = true;
             // Set header values intial to the empty string
@@ -73,7 +79,7 @@ public class RSSFeedParser {
                             if ( isFeedHeader ) {
                                 isFeedHeader = false;
 
-                                feed = new Feed( title, link, description, language,
+                                currentFeed = new Feed( title, link, description, language,
                                         copyright, pubdate );
                             }
                             event = eventReader.nextEvent( );
@@ -128,7 +134,7 @@ public class RSSFeedParser {
                         message.setLink( link );
                         message.setTitle( title );
                         message.setDate( date );
-                        feed.getMessages( ).add( message );
+                        currentFeed.getMessages( ).add( message );
                         event = eventReader.nextEvent( );
                         continue;
                     }
@@ -137,7 +143,20 @@ public class RSSFeedParser {
         } catch ( XMLStreamException e ) {
             throw new RuntimeException( e );
         }
-        return feed;
+    }
+
+    public Feed getParsedFeed() {
+        return currentFeed;
+    }
+
+    public ArrayList< Event > getEvents() {
+        ArrayList< Event > _eventsToReturn = new ArrayList<>();
+        for( FeedMessage m : this.getParsedFeed().getMessages( ) ) {
+            Event _e = new Event( m.getTitle(), m.getDescription(), m.getLink(), m.getDate(), m.getAuthor() );
+            _eventsToReturn.add( _e );
+        }
+
+        return _eventsToReturn;
     }
 
     private String getCharacterData ( XMLEvent event, XMLEventReader eventReader )
