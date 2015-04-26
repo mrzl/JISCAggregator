@@ -14,6 +14,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 /**
@@ -38,12 +39,13 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
                 String eventBoxDivName = "div.exhibition-information";
                 try {
                     Elements eventDiv = htmlDocument.select( eventBoxDivName );
-                    System.out.println( "Events found: " + eventDiv.size() );
-                    for ( int i = 0; i < eventDiv.size( ); i++ ) {
-                        Element e = eventDiv.get( i );
+                    System.out.println( "Events found: " + eventDiv.size( ) );
+                    for ( Iterator< Element > iterator = eventDiv.iterator( ); iterator.hasNext( ); ) {
+                        Element e = iterator.next( );
                         //System.out.println( "Event " + i );
                         //System.out.println( e );
                     }
+
                 } catch ( Exception e ) {
                     this.logger.severe( "Couldn't get the div " + eventBoxDivName + " from the document " + htmlDocument );
                 }
@@ -52,8 +54,8 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
                 try {
                     Elements eventDiv = htmlDocument.select( secondEventBoxName );
                     System.out.println( "Elements found: " + eventDiv.size( ) );
-                    for ( int i = 0; i < eventDiv.size( ); i++ ) {
-                        Element e = eventDiv.get( i );
+                    for ( Iterator< Element > iterator = eventDiv.iterator( ); iterator.hasNext( ); ) {
+                        Element e = iterator.next( );
                         //System.out.println( "Event " + i );
                         //System.out.println( e );
                     }
