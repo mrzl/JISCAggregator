@@ -61,6 +61,7 @@ public class RSSFeedParser extends Parser implements ParserInterface {
         }
     }
 
+    @Override
     public void parse() {
         try {
             boolean isFeedHeader = true;

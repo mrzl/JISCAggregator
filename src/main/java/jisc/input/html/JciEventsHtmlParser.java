@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -40,6 +41,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     /**
      *
      */
+    @Override
     public void parse () {
         String eventSourceUrl = eventSource.getUrl();
         try {
