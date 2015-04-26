@@ -1,6 +1,6 @@
 package rss;
 
-import jisc.input.rss.Feed;
+import jisc.event.EventSource;
 import jisc.input.rss.RSSFeedParser;
 
 import static org.junit.Assert.*;
@@ -13,14 +13,10 @@ public class RssFeedTest {
 
     @org.junit.Test
     public void testNetworkingEventsLondon() {
-        RSSFeedParser parser = new RSSFeedParser("http://feeds2.feedburner.com/Networking-Events-In-London");
-        parser.parse();
-        Feed feed = parser.getParsedFeed( );
-        printFeed( feed );
-        assertTrue( feed.getMessages().size() > 0 );
-    }
+        EventSource networkingEventsLondon = new EventSource( "Networking Events London", "http://feeds2.feedburner.com/Networking-Events-In-London" );
 
-    private void printFeed( Feed feed ) {
-        feed.getMessages( ).forEach( System.out::println );
+        RSSFeedParser parser = new RSSFeedParser( networkingEventsLondon );
+        parser.parse();
+        assertTrue( parser.getEvents().size() > 0 );
     }
 }

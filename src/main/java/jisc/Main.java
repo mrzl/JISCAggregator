@@ -20,7 +20,7 @@ public class Main {
         EventSource networkingEventsLondon = new EventSource( "Networking Events London", "http://feeds2.feedburner.com/Networking-Events-In-London" );
         //EventSource jciLondon = new EventSource( "JCI London", "http://www.jcilondon.org.uk/events/index.html" );
 
-        RSSFeedParser nelRssParser = new RSSFeedParser( networkingEventsLondon.getUrl( ) );
+        RSSFeedParser nelRssParser = new RSSFeedParser( networkingEventsLondon );
         nelRssParser.parse( );
         container.addEvents( nelRssParser.getEvents( ), networkingEventsLondon );
 
@@ -28,8 +28,8 @@ public class Main {
         jciEventsHtmlParser.parse( );
         container.addEvents( jciEventsHtmlParser.getEvents( ), jciEventsHtmlParser.getEventSource( ) );
 
-        //HelperMethods.printEvents( container, networkingEventsLondon );
-        //HelperMethods.printEvents( container, jciEventsHtmlParser.getEventSource());
+        HelperMethods.printEvents( container, networkingEventsLondon );
+        HelperMethods.printEvents( container, jciEventsHtmlParser.getEventSource());
     }
 
 

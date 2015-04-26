@@ -1,6 +1,10 @@
 package jisc.input.rss;
 
 import jisc.event.Event;
+import jisc.event.EventSource;
+import jisc.input.Parser;
+import jisc.input.ParserInterface;
+import jisc.misc.HelperMethods;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,36 +28,42 @@ import javax.xml.stream.events.XMLEvent;
 /**
  * Created by mrzl on 13.04.2015.
  */
-public class RSSFeedParser {
-    static final String TITLE = "title";
-    static final String DESCRIPTION = "description";
-    static final String CHANNEL = "channel";
-    static final String LANGUAGE = "language";
-    static final String COPYRIGHT = "copyright";
-    static final String LINK = "link";
-    static final String AUTHOR = "author";
-    static final String ITEM = "item";
-    static final String PUB_DATE = "pubDate";
-    static final String GUID = "guid";
+public class RSSFeedParser extends Parser implements ParserInterface {
+
+    private static final Logger logger = Logger.getLogger( RSSFeedParser.class.getName( ) );
+
+
+    private static final String TITLE = "title";
+    private static final String DESCRIPTION = "description";
+    private static final String CHANNEL = "channel";
+    private static final String LANGUAGE = "language";
+    private static final String COPYRIGHT = "copyright";
+    private static final String LINK = "link";
+    private static final String AUTHOR = "author";
+    private static final String ITEM = "item";
+    private static final String PUB_DATE = "pubDate";
+    private static final String GUID = "guid";
 
     private URL url;
-
     private Feed currentFeed;
 
-    public RSSFeedParser ( String feedUrl ) {
+    public RSSFeedParser( EventSource _eventSource ) {
+        super();
+
+        this.eventSource = _eventSource;
 
         this.currentFeed = null;
         try {
-            this.url = new URL( feedUrl );
+            this.url = new URL( _eventSource.getUrl() );
         } catch ( MalformedURLException e ) {
-            throw new RuntimeException( e );
+            this.logger.severe( "Couldn't construct a URL from this string: " + _eventSource.getUrl() );
+            this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
         }
     }
 
-    public void parse () {
+    public void parse() {
         try {
             boolean isFeedHeader = true;
-            // Set header values intial to the empty string
             String description = "";
             String title = "";
             String link = "";
@@ -63,12 +74,8 @@ public class RSSFeedParser {
             String pubdate = "";
             String guid = "";
 
-            // First create a new XMLInputFactory
-            XMLInputFactory inputFactory = XMLInputFactory.newInstance( );
-            // Setup a new eventReader
-            InputStream in = read( );
-            XMLEventReader eventReader = inputFactory.createXMLEventReader( in );
-            // read the XML document
+            XMLEventReader eventReader = setupXmlReader( this.url );
+
             while ( eventReader.hasNext( ) ) {
                 XMLEvent event = eventReader.nextEvent( );
                 if ( event.isStartElement( ) ) {
@@ -85,7 +92,7 @@ public class RSSFeedParser {
                             event = eventReader.nextEvent( );
                             break;
                         case TITLE:
-                            title = getCharacterData( event, eventReader );
+                            title = getCharacterData( eventReader );
 
                             Pattern pattern = Pattern.compile( "... \\d\\d ... \\d\\d\\d\\d" );
                             Matcher matcher = pattern.matcher( title );
@@ -104,25 +111,25 @@ public class RSSFeedParser {
 
                             break;
                         case DESCRIPTION:
-                            description = getCharacterData( event, eventReader );
+                            description = getCharacterData( eventReader );
                             break;
                         case LINK:
-                            link = getCharacterData( event, eventReader );
+                            link = getCharacterData( eventReader );
                             break;
                         case GUID:
-                            guid = getCharacterData( event, eventReader );
+                            guid = getCharacterData( eventReader );
                             break;
                         case LANGUAGE:
-                            language = getCharacterData( event, eventReader );
+                            language = getCharacterData( eventReader );
                             break;
                         case AUTHOR:
-                            author = getCharacterData( event, eventReader );
+                            author = getCharacterData( eventReader );
                             break;
                         case PUB_DATE:
-                            pubdate = getCharacterData( event, eventReader );
+                            pubdate = getCharacterData( eventReader );
                             break;
                         case COPYRIGHT:
-                            copyright = getCharacterData( event, eventReader );
+                            copyright = getCharacterData( eventReader );
                             break;
                     }
                 } else if ( event.isEndElement( ) ) {
@@ -141,12 +148,9 @@ public class RSSFeedParser {
                 }
             }
         } catch ( XMLStreamException e ) {
+            this.logger.severe( "Couldn't read XML from this URL: " + this.url );
             throw new RuntimeException( e );
         }
-    }
-
-    public Feed getParsedFeed() {
-        return currentFeed;
     }
 
     public ArrayList< Event > getEvents() {
@@ -159,21 +163,48 @@ public class RSSFeedParser {
         return _eventsToReturn;
     }
 
-    private String getCharacterData ( XMLEvent event, XMLEventReader eventReader )
+    private Feed getParsedFeed() {
+        return currentFeed;
+    }
+
+    /**
+     * Sets op the XML helper instances
+     * @param _url the url opened
+     * @return
+     */
+    private XMLEventReader setupXmlReader ( URL _url ) {
+        XMLInputFactory inputFactory = XMLInputFactory.newInstance( );
+        InputStream in = readFromUrl( _url );
+        try {
+            return inputFactory.createXMLEventReader( in );
+        } catch ( XMLStreamException e ) {
+            this.logger.severe( "Couldn't setup XML reader from this URL: " + _url );
+            this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
+        }
+
+        return null;
+    }
+
+    /**
+     * Opens a URL
+     * @param _url URL to be opened
+     * @return the input stream from the URL
+     */
+    private InputStream readFromUrl ( URL _url ) {
+        try {
+            return _url.openStream( );
+        } catch ( IOException e ) {
+            throw new RuntimeException( e );
+        }
+    }
+
+    private String getCharacterData ( XMLEventReader eventReader )
             throws XMLStreamException {
         String result = "";
-        event = eventReader.nextEvent( );
+        XMLEvent event = eventReader.nextEvent( );
         if ( event instanceof Characters ) {
             result = event.asCharacters( ).getData( );
         }
         return result;
-    }
-
-    private InputStream read () {
-        try {
-            return url.openStream( );
-        } catch ( IOException e ) {
-            throw new RuntimeException( e );
-        }
     }
 }

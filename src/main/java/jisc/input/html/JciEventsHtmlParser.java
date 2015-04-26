@@ -2,6 +2,8 @@ package jisc.input.html;
 
 import jisc.event.Event;
 import jisc.event.EventSource;
+import jisc.input.Parser;
+import jisc.input.ParserInterface;
 import jisc.misc.HelperMethods;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -22,7 +24,7 @@ import java.util.logging.Logger;
 /**
  * Created by mrzl on 15.04.2015.
  */
-public class JciEventsHtmlParser extends HtmlParser implements HtmlParserInterface {
+public class JciEventsHtmlParser extends Parser implements ParserInterface {
 
     private static final Logger logger = Logger.getLogger( JciEventsHtmlParser.class.getName( ) );
 
