@@ -152,17 +152,11 @@ public class RSSFeedParser extends Parser implements ParserInterface {
             this.logger.severe( "Couldn't read XML from this URL: " + this.url );
             throw new RuntimeException( e );
         }
-    }
 
-    @Override
-    public ArrayList< Event > getEvents() {
-        ArrayList< Event > _eventsToReturn = new ArrayList<>();
         for( FeedMessage m : this.currentFeed.getMessages( ) ) {
             Event _e = new Event( m.getTitle(), m.getDescription(), m.getLink(), m.getDate(), m.getAuthor() );
-            _eventsToReturn.add( _e );
+            super.events.add( _e );
         }
-
-        return _eventsToReturn;
     }
 
     /**
