@@ -14,12 +14,25 @@ import java.util.logging.*;
  */
 public class HelperMethods {
 
+    /**
+     * Creates a String from the stack trace of an exception.
+     * Usually used to construct a string that's passed to the logger.
+     *
+     * @param _e the exception this method returns the stack trace of
+     *
+     * @return a String containing the complete stack trace of the passed exception
+     */
     public static String getStackTraceFromException( Exception _e ) {
         StringWriter sw = new StringWriter( );
         _e.printStackTrace( new PrintWriter( sw ) );
         return sw.toString();
     }
 
+    /**
+     * Sets the overall log level of all loggers in the project.
+     *
+     * @param _logLevel the log level all loggers are set to
+     */
     public static void setGlobalLogLevel( Level _logLevel ) {
         Logger anonymousLogger = LogManager.getLogManager( ).getLogger( "" );
         Handler[] handlers = anonymousLogger.getHandlers( );
@@ -31,6 +44,12 @@ public class HelperMethods {
         }
     }
 
+    /**
+     * Prints all events of a container of the passed @link{just.event.EventSource}
+     *
+     * @param _container the container that contains all events that are being printed
+     * @param _source only events who are associated to this @link{just.event.EventSource} are printed
+     */
     public static void printEvents( EventContainer _container, EventSource _source ) {
         System.out.println( "Events of " + _source );
         try {
