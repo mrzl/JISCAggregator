@@ -35,7 +35,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     public JciEventsHtmlParser () {
         super( );
 
-        this.eventSource = new EventSource( "JCI London", "http://www.jcilondon.org.uk/events/index.html" );
+        super.eventSource = new EventSource( "JCI London", "http://www.jcilondon.org.uk/events/index.html" );
     }
 
     /**
@@ -43,7 +43,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
      */
     @Override
     public void parse () {
-        String eventSourceUrl = eventSource.getUrl();
+        String eventSourceUrl = super.eventSource.getUrl();
         try {
             URL url = new URL( eventSourceUrl );
             try {
@@ -55,8 +55,8 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
                     // looping through all events listed on the site
                     for ( Iterator< Element > iterator = eventDiv.iterator( ); iterator.hasNext( ); ) {
                         Element _element = iterator.next();
-                        Event e = parseEventFromDiv( _element );
-                        events.add( e );
+                        Event _event = parseEventFromDiv( _element );
+                        super.events.add( _event );
                     }
                 }catch( Exception e ) {
                     this.logger.severe( "Couldn't get the div " + eventBoxDivName + " from the document " + htmlDocument );
@@ -77,14 +77,14 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
      * @param _element@return
      */
     private Event parseEventFromDiv ( Element _element ) {
-        String finalTitle = getEventTitle( _element );
-        String finalVenue = getEventVenue( _element );
-        String finalType = getEventType( _element );
-        String finalPrice = getEventPrice( _element );
-        String finalUrl = getEventUrl( _element );
-        Date finalDate = getEventDate( _element );
+        String _title = getEventTitle( _element );
+        String _venue = getEventVenue( _element );
+        String _type = getEventType( _element );
+        String _price = getEventPrice( _element );
+        String _url = getEventUrl( _element );
+        Date _date = getEventDate( _element );
 
-        return new Event( finalTitle, finalVenue + " " + finalType + " Price: " + finalPrice, finalUrl, finalDate, this.eventSource.getPrettyName() );
+        return new Event( _title, _venue + " " + _type + " Price: " + _price, _url, _date, this.eventSource.toString() );
     }
 
     /**

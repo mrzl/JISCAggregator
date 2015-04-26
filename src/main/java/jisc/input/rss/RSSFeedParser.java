@@ -50,7 +50,7 @@ public class RSSFeedParser extends Parser implements ParserInterface {
     public RSSFeedParser( EventSource _eventSource ) {
         super();
 
-        this.eventSource = _eventSource;
+        super.eventSource = _eventSource;
 
         this.currentFeed = null;
         try {
@@ -154,18 +154,15 @@ public class RSSFeedParser extends Parser implements ParserInterface {
         }
     }
 
+    @Override
     public ArrayList< Event > getEvents() {
         ArrayList< Event > _eventsToReturn = new ArrayList<>();
-        for( FeedMessage m : this.getParsedFeed().getMessages( ) ) {
+        for( FeedMessage m : this.currentFeed.getMessages( ) ) {
             Event _e = new Event( m.getTitle(), m.getDescription(), m.getLink(), m.getDate(), m.getAuthor() );
             _eventsToReturn.add( _e );
         }
 
         return _eventsToReturn;
-    }
-
-    private Feed getParsedFeed() {
-        return currentFeed;
     }
 
     /**

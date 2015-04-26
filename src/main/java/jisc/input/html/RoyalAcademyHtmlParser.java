@@ -14,6 +14,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Logger;
 
@@ -24,44 +25,26 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
 
     private static final Logger logger = Logger.getLogger( RoyalAcademyHtmlParser.class.getName( ) );
 
+    private final String TOP_EVENTS_HTML_CLASS = "div.exhibition-information";
+    private final String RELATED_EVENTS_HTML_CLASS = ".related-items__event";
+
     public RoyalAcademyHtmlParser () {
-        this.eventSource = new EventSource( "Royal Academy London", "https://www.royalacademy.org.uk/exhibitions-and-events#events-index" );
+        super.eventSource = new EventSource( "Royal Academy London", "https://www.royalacademy.org.uk/exhibitions-and-events#events-index" );
     }
 
     @Override
     public void parse () {
-        String eventSourceUrl = eventSource.getUrl( );
+        String eventSourceUrl = super.eventSource.getUrl( );
         try {
             URL url = new URL( eventSourceUrl );
             try {
                 Connection connection = Jsoup.connect( url.toString( ) );
                 Document htmlDocument = connection.get( );
-                String eventBoxDivName = "div.exhibition-information";
-                try {
-                    Elements eventDiv = htmlDocument.select( eventBoxDivName );
-                    System.out.println( "Events found: " + eventDiv.size( ) );
-                    for ( Iterator< Element > iterator = eventDiv.iterator( ); iterator.hasNext( ); ) {
-                        Element e = iterator.next( );
-                        //System.out.println( "Event " + i );
-                        //System.out.println( e );
-                    }
 
-                } catch ( Exception e ) {
-                    this.logger.severe( "Couldn't get the div " + eventBoxDivName + " from the document " + htmlDocument );
-                }
-
-                String secondEventBoxName = ".related-items__event";
-                try {
-                    Elements eventDiv = htmlDocument.select( secondEventBoxName );
-                    System.out.println( "Elements found: " + eventDiv.size( ) );
-                    for ( Iterator< Element > iterator = eventDiv.iterator( ); iterator.hasNext( ); ) {
-                        Element e = iterator.next( );
-                        //System.out.println( "Event " + i );
-                        //System.out.println( e );
-                    }
-                } catch ( Exception e ) {
-                    this.logger.severe( "Couldn't get the div " + eventBoxDivName + " from the document " + htmlDocument );
-                }
+                ArrayList< Event > topEvents = parseTopEvents( htmlDocument );
+                ArrayList< Event > relatedEvents = parseRelatedEvents( htmlDocument );
+                super.events.addAll( topEvents );
+                super.events.addAll( relatedEvents );
 
             } catch ( IOException e ) {
                 this.logger.severe( "Couldn't get document from the passed URL: " + url );
@@ -71,5 +54,44 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
             this.logger.severe( "Couldn't construct a valid URL from the EventSource url string: " + eventSourceUrl );
             this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
         }
+    }
+
+    private ArrayList< Event > parseTopEvents( Document _rootDocument ) {
+        ArrayList< Event > _events = new ArrayList<>();
+
+        String eventBoxDivName = TOP_EVENTS_HTML_CLASS;
+        try {
+            Elements eventDiv = _rootDocument.select( eventBoxDivName );
+            System.out.println( "Events found: " + eventDiv.size( ) );
+            for ( Iterator< Element > iterator = eventDiv.iterator( ); iterator.hasNext( ); ) {
+                Element e = iterator.next( );
+                //System.out.println( "Event " + i );
+                //System.out.println( e );
+            }
+
+        } catch ( Exception e ) {
+            this.logger.severe( "Couldn't get the div " + eventBoxDivName + " from the document " + _rootDocument );
+        }
+
+        return _events;
+    }
+
+    private ArrayList< Event > parseRelatedEvents( Document _rootDocument ) {
+        ArrayList< Event > _events = new ArrayList<>();
+
+        String eventBoxDivName = RELATED_EVENTS_HTML_CLASS;
+        try {
+            Elements eventDiv = _rootDocument.select( eventBoxDivName );
+            System.out.println( "Elements found: " + eventDiv.size( ) );
+            for ( Iterator< Element > iterator = eventDiv.iterator( ); iterator.hasNext( ); ) {
+                Element e = iterator.next( );
+                //System.out.println( "Event " + i );
+                //System.out.println( e );
+            }
+        } catch ( Exception e ) {
+            this.logger.severe( "Couldn't get the div " + eventBoxDivName + " from the document " + _rootDocument );
+        }
+
+        return _events;
     }
 }
