@@ -29,6 +29,14 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
 
     private static final Logger logger = Logger.getLogger( JciEventsHtmlParser.class.getName( ) );
 
+    private static final String MAIN_EVENT_DIV = "div.event_box";
+    private static final String EVENT_TITLE_ELEMENT = "p.eee_title";
+    private static final String EVENT_VENUE_ELEMENT = "div.event_type_details tbody";
+    private static final String EVENT_TYPE_ELEMENT = "div.event_type_details tbody";
+    private static final String EVENT_URL_ELEMENT = "p.eee_title";
+    private static final String EVENT_DATE_ELEMENT = "div.event_type_details tbody";
+    private static final String EVENT_PRICE_ELEMENT = "div.event_type_details tbody";
+
     /**
      *
      */
@@ -49,7 +57,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
             try {
                 Connection connection = Jsoup.connect( url.toString() );
                 Document htmlDocument = connection.get( );
-                String eventBoxDivName = "div.event_box";
+                String eventBoxDivName = this.MAIN_EVENT_DIV;
                 try {
                     Elements eventDiv = htmlDocument.select( eventBoxDivName );
                     // looping through all events listed on the site
@@ -84,7 +92,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
         String _url = getEventUrl( _element );
         Date _date = getEventDate( _element );
 
-        return new Event( _title, _venue + " " + _type + " Price: " + _price, _url, _date, this.eventSource.toString() );
+        return new Event( _title, _venue + " " + _type + " Price: " + _price, _url, _date, this.eventSource.getPrettyName() );
     }
 
     /**
@@ -97,7 +105,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
         String eventTitle = null;
 
         try {
-            eventTitle = _element.select( "p.eee_title" ).first( ).select( "a" ).html( );
+            eventTitle = _element.select( this.EVENT_TITLE_ELEMENT ).first( ).select( "a" ).html( );
         } catch ( Exception e ) {
             this.logger.severe( "Couldn't load the event title from document: " + _element );
             this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
@@ -117,7 +125,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
         String eventVenue = null;
 
         try {
-            eventVenue = _element.select( "div.event_type_details tbody" ).first( ).children( ).get( 1 ).child( 1 ).html( );
+            eventVenue = _element.select( this.EVENT_VENUE_ELEMENT ).first( ).children( ).get( 1 ).child( 1 ).html( );
         } catch ( Exception e ) {
             this.logger.severe( "Couldn't load the event venue from document: " + _element );
             this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
@@ -137,7 +145,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
         String eventType = null;
 
         try {
-            eventType = _element.select( "div.event_type_details tbody" ).first( ).children( ).get( 0 ).child( 1 ).html( );
+            eventType = _element.select( this.EVENT_TYPE_ELEMENT ).first( ).children( ).get( 0 ).child( 1 ).html( );
         } catch ( Exception e ) {
             this.logger.severe( "Couldn't load the event type from document: " + _element );
             this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
@@ -157,7 +165,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
         String eventUrl = null;
 
         try {
-            eventUrl = _element.select( "p.eee_title" ).first( ).select( "a" ).attr( "href" );
+            eventUrl = _element.select( this.EVENT_URL_ELEMENT ).first( ).select( "a" ).attr( "href" );
         } catch ( Exception e ) {
             this.logger.severe( "Couldn't load the event url from document: " + _element );
             this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
@@ -177,7 +185,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
         Date eventDate = null;
 
         try {
-            String eventDateString = _element.select( "div.event_type_details tbody" ).first( ).children( ).get( 2 ).child( 1 ).html( );
+            String eventDateString = _element.select( this.EVENT_DATE_ELEMENT ).first( ).children( ).get( 2 ).child( 1 ).html( );
             eventDate = this.parseDate( eventDateString );
         } catch ( Exception e ) {
             this.logger.severe( "Couldn't load the event date from document: " + _element );
@@ -198,7 +206,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
         String eventPrice = null;
 
         try {
-            Element e = _element.select( "div.event_type_details tbody" ).first( ).children( ).get( 3 ).child( 1 );
+            Element e = _element.select( this.EVENT_PRICE_ELEMENT ).first( ).children( ).get( 3 ).child( 1 );
             eventPrice = e.html( );
         } catch ( Exception e ) {
             this.logger.warning( "Couldn't load the event price from document: " + _element );
