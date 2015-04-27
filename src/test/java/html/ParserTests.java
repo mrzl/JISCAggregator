@@ -22,6 +22,7 @@ public class ParserTests {
         EventSource jciLondon = new EventSource( "JCI London", "http://www.jcilondon.org.uk/events/index.html" );
         JciEventsHtmlParser parser = new JciEventsHtmlParser();
         parser.parse();
+        System.out.println( "JCI events: " + parser.getEvents().size() );
         assertTrue( parser.getEvents( ).size( ) > 0 );
     }
 
@@ -33,6 +34,7 @@ public class ParserTests {
 
         RSSFeedParser parser = new RSSFeedParser( networkingEventsLondon );
         parser.parse();
+        System.out.println( "NetworkingEventsLondon events: " + parser.getEvents().size() );
         assertTrue( parser.getEvents().size( ) > 0 );
     }
 
@@ -42,6 +44,7 @@ public class ParserTests {
 
         RoyalAcademyHtmlParser royalAcademy = new RoyalAcademyHtmlParser();
         royalAcademy.parse();
+        System.out.println( "Royal Academy events: " + royalAcademy.getEvents().size() );
         assertTrue( royalAcademy.getEvents().size( ) > 0 );
     }
 }
