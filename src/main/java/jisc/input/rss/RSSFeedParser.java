@@ -12,7 +12,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Logger;
@@ -48,9 +47,7 @@ public class RSSFeedParser extends Parser implements ParserInterface {
     private Feed currentFeed;
 
     public RSSFeedParser( EventSource _eventSource ) {
-        super();
-
-        super.eventSource = _eventSource;
+        super(_eventSource );
 
         this.currentFeed = null;
         try {
@@ -154,7 +151,7 @@ public class RSSFeedParser extends Parser implements ParserInterface {
         }
 
         for( FeedMessage m : this.currentFeed.getMessages( ) ) {
-            Event _e = new Event( m.getTitle(), m.getDescription(), m.getLink(), m.getDate(), m.getAuthor() );
+            Event _e = new Event( m.getTitle(), m.getDescription(), m.getLink(), m.getDate(), this.eventSource.getPrettyName() );
             super.events.add( _e );
         }
     }

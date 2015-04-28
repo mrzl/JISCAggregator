@@ -43,10 +43,9 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
     private final String RELATED_EVENTS_LOCATION_ELEMENT = "p.event-location";
 
     public RoyalAcademyHtmlParser () {
-        super.eventSource = new EventSource( "Royal Academy London", "https://www.royalacademy.org.uk/exhibitions-and-events#events-index" );
+        super( new EventSource( "Royal Academy London", "https://www.royalacademy.org.uk/exhibitions-and-events#events-index" ) );
     }
 
-    @Override
     public void parse () {
         String eventSourceUrl = super.eventSource.getUrl( );
         try {
@@ -83,7 +82,7 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
                 // TODO: parse date
                 String _date = e.select( this.TOP_EVENTS_DATE_ELEMENT ).html();
                 String _description = e.select( this.TOP_EVENTS_DESCRIPTION_ELEMENT ).html();
-                String _url = e.select( this.TOP_EVENTS_URL_ELEMENT ).attr( "href" );
+                String _url = "https://www.royalacademy.org.uk" + e.select( this.TOP_EVENTS_URL_ELEMENT ).attr( "href" );
 
                 Event _event = new Event( _title + " - " + _subtitle, _description, _url, new Date(), this.eventSource.getPrettyName() );
                 _events.add( _event );
@@ -104,7 +103,7 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
             Elements eventDiv = _rootDocument.select( eventBoxDivName );
             for ( Iterator< Element > iterator = eventDiv.iterator( ); iterator.hasNext( ); ) {
                 Element e = iterator.next( );
-                String _url = e.child( 0 ).attr( "href" );
+                String _url = "https://www.royalacademy.org.uk" + e.child( 0 ).attr( "href" );
                 String _title = e.select( this.RELATED_EVENTS_TITLE_ELEMENT ).html();
                 String _subtitle = e.select( this.RELATED_EVENTS_SUBTITLE_ELEMENT ).html();
                 // TODO: parse date

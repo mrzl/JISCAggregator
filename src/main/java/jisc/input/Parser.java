@@ -11,14 +11,15 @@ import java.util.ArrayList;
  * Created by mrzl on 18.04.2015.
  */
 public class Parser {
-    protected EventSource eventSource;
     protected ArrayList< Event > events;
+    protected EventSource eventSource;
 
     /**
      * All parsers have a list which contain their parsed events
      */
-    public Parser () {
+    public Parser ( EventSource _eventSource ) {
         this.events = new ArrayList<>( );
+        this.eventSource = _eventSource;
     }
 
     /**

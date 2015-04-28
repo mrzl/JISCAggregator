@@ -29,21 +29,19 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
 
     private static final Logger logger = Logger.getLogger( JciEventsHtmlParser.class.getName( ) );
 
-    private static final String MAIN_EVENT_DIV = "div.event_box";
-    private static final String EVENT_TITLE_ELEMENT = "p.eee_title";
-    private static final String EVENT_VENUE_ELEMENT = "div.event_type_details tbody";
-    private static final String EVENT_TYPE_ELEMENT = "div.event_type_details tbody";
-    private static final String EVENT_URL_ELEMENT = "p.eee_title";
-    private static final String EVENT_DATE_ELEMENT = "div.event_type_details tbody";
-    private static final String EVENT_PRICE_ELEMENT = "div.event_type_details tbody";
+    private final String MAIN_EVENT_DIV = "div.event_box";
+    private final String EVENT_TITLE_ELEMENT = "p.eee_title";
+    private final String EVENT_VENUE_ELEMENT = "div.event_type_details tbody";
+    private final String EVENT_TYPE_ELEMENT = "div.event_type_details tbody";
+    private final String EVENT_URL_ELEMENT = "p.eee_title";
+    private final String EVENT_DATE_ELEMENT = "div.event_type_details tbody";
+    private final String EVENT_PRICE_ELEMENT = "div.event_type_details tbody";
 
     /**
      *
      */
     public JciEventsHtmlParser () {
-        super( );
-
-        super.eventSource = new EventSource( "JCI London", "http://www.jcilondon.org.uk/events/index.html" );
+        super( new EventSource( "JCI London", "http://www.jcilondon.org.uk/events/index.html" ) );
     }
 
     /**
@@ -82,7 +80,8 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     /**
      *
      *
-     * @param _element@return
+     * @param _element
+     * @return
      */
     private Event parseEventFromDiv ( Element _element ) {
         String _title = getEventTitle( _element );
@@ -98,7 +97,8 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     /**
      *
      *
-     * @param _element@return
+     * @param _element
+     * @return
      */
     private String getEventTitle ( Element _element ){
         this.logger.entering( getClass().getName(), "getEventTitle" );
@@ -118,7 +118,8 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     /**
      *
      *
-     * @param _element@return
+     * @param _element
+     * @return
      */
     private String getEventVenue ( Element _element ) {
         this.logger.entering( getClass().getName(), "getEventVenue" );
@@ -138,7 +139,8 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     /**
      *
      *
-     * @param _element@return
+     * @param _element
+     * @return
      */
     private String getEventType ( Element _element ) {
         this.logger.entering( getClass().getName(), "getEventType" );
@@ -158,7 +160,8 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     /**
      *
      *
-     * @param _element@return
+     * @param _element
+     * @return
      */
     private String getEventUrl ( Element _element ) {
         this.logger.entering( getClass().getName(), "getEventUrl" );
@@ -178,7 +181,8 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     /**
      *
      *
-     * @param _element@return
+     * @param _element
+     * @return
      */
     private Date getEventDate ( Element _element ) {
         this.logger.entering( getClass().getName(), "getEventDate" );
@@ -199,7 +203,8 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     /**
      *
      *
-     * @param _element@return
+     * @param _element
+     * @return
      */
     private String getEventPrice ( Element _element ) {
         this.logger.entering( getClass().getName(), "getEventPrice" );
