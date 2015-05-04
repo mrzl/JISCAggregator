@@ -22,7 +22,7 @@ import static spark.Spark.get;
  */
 public class Main {
     public static void main ( String[] args ) {
-        HelperMethods.setGlobalLogLevel( Level.INFO );
+        HelperMethods.setGlobalLogLevel( Level.SEVERE );
 
         EventContainer container = new EventContainer( );
 

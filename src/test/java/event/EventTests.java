@@ -14,12 +14,12 @@ public class EventTests {
     public void simpleEvent () {
 
         Date date = new Date();
-        Event event = new Event("title", "desc", "url11", date, "author" );
+        Event event = new Event("title", "desc", "url11", date.toString(), "author" );
 
         boolean titleRight = event.getTitle() == "title" ? true : false;
         boolean descRight = event.getDescription( ) == "desc" ? true : false;
         boolean urlRight = event.getUrl( ) == "url11" ? true : false;
-        boolean dateRight = event.getDate( ) == date ? true : false;
+        boolean dateRight = event.getDate( ) == date.toString() ? true : false;
         boolean authorRight = event.getAuthor( ) == "author" ? true : false;
 
         assertTrue( titleRight && descRight && urlRight && dateRight && authorRight );

@@ -91,7 +91,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
         String _url = getEventUrl( _element );
         Date _date = getEventDate( _element );
 
-        return new Event( _title, _venue + " " + _type + " Price: " + _price, _url, _date, this.eventSource.getPrettyName() );
+        return new Event( _title, _venue + " " + _type + " Price: " + _price, _url, _date.toString(), this.eventSource.getPrettyName() );
     }
 
     /**

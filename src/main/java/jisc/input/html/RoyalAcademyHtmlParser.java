@@ -79,12 +79,13 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
                 Element e = iterator.next( );
                 String _title = e.select( this.TOP_EVENTS_TITLE_ELEMENT ).html();
                 String _subtitle = e.select( this.TOP_EVENTS_SUBTITLE_ELEMENT ).html();
-                // TODO: parse date
                 String _date = e.select( this.TOP_EVENTS_DATE_ELEMENT ).html();
                 String _description = e.select( this.TOP_EVENTS_DESCRIPTION_ELEMENT ).html();
                 String _url = "https://www.royalacademy.org.uk" + e.select( this.TOP_EVENTS_URL_ELEMENT ).attr( "href" );
 
-                Event _event = new Event( _title + " - " + _subtitle, _description, _url, new Date(), this.eventSource.getPrettyName() );
+                _date = _date.replace( "<br>", "" );
+
+                Event _event = new Event( _title + " - " + _subtitle, _description, _url, _date, this.eventSource.getPrettyName() );
                 _events.add( _event );
             }
 
@@ -106,13 +107,16 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
                 String _url = "https://www.royalacademy.org.uk" + e.child( 0 ).attr( "href" );
                 String _title = e.select( this.RELATED_EVENTS_TITLE_ELEMENT ).html();
                 String _subtitle = e.select( this.RELATED_EVENTS_SUBTITLE_ELEMENT ).html();
-                // TODO: parse date
                 String _date = e.select( this.RELATED_EVENTS_DATE_ELEMENT ).html();
                 String _description = e.select( this.RELATED_EVENTS_DESCRIPTION_ELEMENT ).html();
                 String _price = e.select( this.RELATED_EVENTS_PRICE_ELEMENT ).html();
                 String _location = e.select( this.RELATED_EVENTS_LOCATION_ELEMENT).html();
                 String _type = e.select( this.RELATED_EVENTS_TYPE_ELEMENT ).html();
-                Event _event = new Event( _title + " - " + _subtitle, _description, _url, new Date(), this.eventSource.getPrettyName() );
+
+                _date = _date.replace( "<br>", "" );
+
+
+                Event _event = new Event( _title + " - " + _subtitle, _description, _url, _date, this.eventSource.getPrettyName() );
                 this.logger.info( "Event date of " + _title + " is: " + _date );
                 _events.add( _event );
             }

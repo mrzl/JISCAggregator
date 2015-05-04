@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Logger;
@@ -65,7 +66,7 @@ public class RSSFeedParser extends Parser implements ParserInterface {
             String description = "";
             String title = "";
             String link = "";
-            Date date = null;
+            Date date = new Date();
             String language = "";
             String copyright = "";
             String author = "";
@@ -151,9 +152,49 @@ public class RSSFeedParser extends Parser implements ParserInterface {
         }
 
         for( FeedMessage m : this.currentFeed.getMessages( ) ) {
-            Event _e = new Event( m.getTitle(), m.getDescription(), m.getLink(), m.getDate(), this.eventSource.getPrettyName() );
+            String _date = parseDateFromTitle( m.getTitle() );
+
+            String title = m.getTitle().substring( 0, getIndexOfDateStart( m.getTitle() ) - 2 );
+
+            Event _e = new Event( title, m.getDescription(), m.getLink(), _date, this.eventSource.getPrettyName() );
             super.events.add( _e );
         }
+    }
+
+    /**
+     * parses a date from the NEL rss feed
+     *
+     * @param _title
+     * @return
+     */
+    private String parseDateFromTitle( String _title ) {
+        return _title.substring( getIndexOfDateStart( _title ) );
+    }
+
+    /**
+     * returns the index of the start of the date from the passed String
+     * @param _title
+     * @return
+     */
+    private int getIndexOfDateStart( String _title ) {
+        ArrayList< String > dayOfWeek = new ArrayList<>();
+        dayOfWeek.add( "Mon" );
+        dayOfWeek.add( "Tue" );
+        dayOfWeek.add( "Wed" );
+        dayOfWeek.add( "Thu" );
+        dayOfWeek.add( "Fri" );
+        dayOfWeek.add( "Sat" );
+        dayOfWeek.add( "Sun" );
+        int _dateIndex = _title.length();
+        for( String day : dayOfWeek ) {
+            int index = _title.indexOf( day );
+            // if it exists
+            if( index != -1 ) {
+                _dateIndex = index;
+            }
+        }
+
+        return _dateIndex;
     }
 
     /**
