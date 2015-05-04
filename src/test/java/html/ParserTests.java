@@ -3,7 +3,7 @@ package html;
 import jisc.event.EventSource;
 import jisc.input.html.JciEventsHtmlParser;
 import jisc.input.html.RoyalAcademyHtmlParser;
-import jisc.input.rss.RSSFeedParser;
+import jisc.input.rss.NetworkingEventsLondonRssParser;
 import jisc.misc.HelperMethods;
 
 import java.util.logging.Level;
@@ -32,7 +32,7 @@ public class ParserTests {
 
         EventSource networkingEventsLondon = new EventSource( "Networking Events London", "http://feeds2.feedburner.com/Networking-Events-In-London" );
 
-        RSSFeedParser parser = new RSSFeedParser( networkingEventsLondon );
+        NetworkingEventsLondonRssParser parser = new NetworkingEventsLondonRssParser( networkingEventsLondon );
         parser.parse();
         System.out.println( "NetworkingEventsLondon events: " + parser.getEvents().size() );
         assertTrue( parser.getEvents().size( ) > 0 );

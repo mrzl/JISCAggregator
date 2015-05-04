@@ -28,9 +28,9 @@ import javax.xml.stream.events.XMLEvent;
 /**
  * Created by mrzl on 13.04.2015.
  */
-public class RSSFeedParser extends Parser implements ParserInterface {
+public class NetworkingEventsLondonRssParser extends Parser implements ParserInterface {
 
-    private static final Logger logger = Logger.getLogger( RSSFeedParser.class.getName( ) );
+    private static final Logger logger = Logger.getLogger( NetworkingEventsLondonRssParser.class.getName( ) );
 
 
     private static final String TITLE = "title";
@@ -47,14 +47,14 @@ public class RSSFeedParser extends Parser implements ParserInterface {
     private URL url;
     private Feed currentFeed;
 
-    public RSSFeedParser( EventSource _eventSource ) {
-        super(_eventSource );
+    public NetworkingEventsLondonRssParser () {
+        super( new EventSource( "Networking Events London", "http://feeds2.feedburner.com/Networking-Events-In-London" ) );
 
         this.currentFeed = null;
         try {
-            this.url = new URL( _eventSource.getUrl() );
+            this.url = new URL( super.eventSource.getUrl() );
         } catch ( MalformedURLException e ) {
-            this.logger.severe( "Couldn't construct a URL from this string: " + _eventSource.getUrl() );
+            this.logger.severe( "Couldn't construct a URL from this string: " + super.eventSource.getUrl() );
             this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
         }
     }
