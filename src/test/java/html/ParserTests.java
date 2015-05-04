@@ -30,9 +30,7 @@ public class ParserTests {
     public void testNetworkingEventsLondon() {
         HelperMethods.setGlobalLogLevel( Level.SEVERE );
 
-        EventSource networkingEventsLondon = new EventSource( "Networking Events London", "http://feeds2.feedburner.com/Networking-Events-In-London" );
-
-        NetworkingEventsLondonRssParser parser = new NetworkingEventsLondonRssParser( networkingEventsLondon );
+        NetworkingEventsLondonRssParser parser = new NetworkingEventsLondonRssParser( );
         parser.parse();
         System.out.println( "NetworkingEventsLondon events: " + parser.getEvents().size() );
         assertTrue( parser.getEvents().size( ) > 0 );
