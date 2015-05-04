@@ -113,6 +113,7 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
                 String _location = e.select( this.RELATED_EVENTS_LOCATION_ELEMENT).html();
                 String _type = e.select( this.RELATED_EVENTS_TYPE_ELEMENT ).html();
                 Event _event = new Event( _title + " - " + _subtitle, _description, _url, new Date(), this.eventSource.getPrettyName() );
+                this.logger.info( "Event date of " + _title + " is: " + _date );
                 _events.add( _event );
             }
         } catch ( Exception e ) {

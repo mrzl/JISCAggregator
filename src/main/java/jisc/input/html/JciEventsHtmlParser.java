@@ -49,7 +49,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
      */
     @Override
     public void parse () {
-        String eventSourceUrl = super.eventSource.getUrl();
+        String eventSourceUrl = super.eventSource.getUrl( );
         try {
             URL url = new URL( eventSourceUrl );
             try {
@@ -169,6 +169,13 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
 
         try {
             eventUrl = _element.select( this.EVENT_URL_ELEMENT ).first( ).select( "a" ).attr( "href" );
+
+            // fixes the irregular urls, which sometimes come without the website as part of the url
+            String websiteAdress = "http://www.jciuk.org.uk";
+            String secondWebsiteAdress = "http://www.jcilondon.org.uk";
+            if( !eventUrl.contains( websiteAdress ) ) {
+                eventUrl = secondWebsiteAdress + eventUrl;
+            }
         } catch ( Exception e ) {
             this.logger.severe( "Couldn't load the event url from document: " + _element );
             this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
