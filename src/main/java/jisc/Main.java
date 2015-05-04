@@ -7,13 +7,14 @@ import jisc.input.html.JciEventsHtmlParser;
 import jisc.input.html.RoyalAcademyHtmlParser;
 import jisc.misc.HelperMethods;
 import jisc.input.rss.RSSFeedParser;
-import jisc.testing.Book;
+
 import org.rendersnake.HtmlAttributes;
 import org.rendersnake.HtmlCanvas;
 
 import java.io.IOException;
 import java.util.logging.*;
 
+import static org.rendersnake.HtmlAttributesFactory.class_;
 import static spark.Spark.get;
 
 /**
@@ -21,7 +22,7 @@ import static spark.Spark.get;
  */
 public class Main {
     public static void main ( String[] args ) {
-        HelperMethods.setGlobalLogLevel( Level.SEVERE );
+        HelperMethods.setGlobalLogLevel( Level.INFO );
 
         EventContainer container = new EventContainer( );
 
@@ -39,9 +40,9 @@ public class Main {
         container.addEvents( jciEventsHtmlParser.getEvents( ), jciEventsHtmlParser.getEventSource( ) );
 
         // adds royal academy events
-        RoyalAcademyHtmlParser royalAcademy = new RoyalAcademyHtmlParser();
-        royalAcademy.parse();
-        container.addEvents( royalAcademy.getEvents(), royalAcademy.getEventSource() );
+        RoyalAcademyHtmlParser royalAcademy = new RoyalAcademyHtmlParser( );
+        royalAcademy.parse( );
+        container.addEvents( royalAcademy.getEvents( ), royalAcademy.getEventSource( ) );
 
         //HelperMethods.printEvents( container, networkingEventsLondon );
         //HelperMethods.printEvents( container, jciEventsHtmlParser.getEventSource());
@@ -50,42 +51,57 @@ public class Main {
         htmlOutput( container );
     }
 
-    public static void htmlOutput( EventContainer _container ) {
+    public static void htmlOutput ( EventContainer _container ) {
 
-        get("/", ( request, response) -> "<input type=\"submit\" value=\"View events\" \n" +
+        get( "/", ( request, response ) -> "<input type=\"submit\" value=\"View events\" \n" +
                 "    onclick=\"window.location='/events';\" />       " );
-        get("/events", ( request, response) -> {
+        get( "/events", ( request, response ) -> {
+
 
             HtmlAttributes attributes = new HtmlAttributes( "target", "_blank" );
 
-            HtmlCanvas html = new HtmlCanvas();
+            HtmlCanvas html = new HtmlCanvas( );
+            html.head( ).macros( ).stylesheet( "http://bersk.iapetus.feralhosting.com/table_style.css" )._head( );
             HtmlCanvas htmlCanvas = null;
             try {
-                htmlCanvas = html.table( new HtmlAttributes( "border", "1" ) );
-                        for( Event e : _container.getEvents() ) {
-                            HtmlAttributes _attr = new HtmlAttributes( attributes );
-                            _attr.add( "href", e.getUrl() );
-                            htmlCanvas.tr( )
-                                    .td( ).write( e.getTitle() ).close( )
-                                    .td( new HtmlAttributes( "width", "100" )  ).write( e.getDescription() ).close( )
-                                    .td( ).write( String.valueOf( e.getDate() ) ).close( )
-                                    .td( ).write( e.getAuthor() ).close( )
+                htmlCanvas = html.div( class_( "datagrid" ) ).table( )
+                        .thead( )
+                        .tr( )
+                        .th( ).write( "Title" )._th( )
+                        .th( ).write( "Description" )._th( )
+                        .th( ).write( "Date" )._th( )
+                        .th( ).write( "Source" )._th( )
+                        .th( ).write( "Event Link" )._th( )
+                        ._tr( )
+                        ._thead( )
+                        .tbody( );
 
-                                    .td( ).a( _attr ).content( e.getUrl( ) ).close( )
-                                    ._tr( );
+                int counter = 1;
+                for ( Event e : _container.getEvents( ) ) {
+                    counter++;
+                    HtmlAttributes _attr = new HtmlAttributes( attributes );
+                    _attr.add( "href", e.getUrl( ) );
+                    if ( counter % 2 == 0 ) {
+                        htmlCanvas.tr( class_( "alt" ) );
+                    } else {
+                        htmlCanvas.tr( );
+                    }
 
-                        }
-                htmlCanvas._table( );
+                    htmlCanvas.td( ).write( e.getTitle( ) ).close( )
+                            .td( new HtmlAttributes( "width", "100" ) ).write( e.getDescription( ) ).close( )
+                            .td( ).write( String.valueOf( e.getDate( ) ) ).close( )
+                            .td( ).write( e.getAuthor( ) ).close( )
+                            .td( ).a( _attr ).content( e.getUrl( ) ).close( )
+                            ._tr( );
+                }
+                htmlCanvas._tbody( )._table( )._div( );
+
+
             } catch ( IOException e ) {
                 e.printStackTrace( );
             }
 
-            String output = "";
-            for( Event e : _container.getEvents()) {
-                //output += e.getTitle() + " - " + e.getDescription() + " - " + e.getDate() + " - " + e.getAuthor() + " - " + e.getUrl() + "</br>";
-            }
-            output += htmlCanvas.toHtml();
-            return output;
-        });
+            return htmlCanvas.toHtml( );
+        } );
     }
 }
