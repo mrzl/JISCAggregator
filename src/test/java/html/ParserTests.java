@@ -19,7 +19,6 @@ public class ParserTests {
     public void testRead() {
         HelperMethods.setGlobalLogLevel( Level.SEVERE );
 
-        EventSource jciLondon = new EventSource( "JCI London", "http://www.jcilondon.org.uk/events/index.html" );
         JciEventsHtmlParser parser = new JciEventsHtmlParser();
         parser.parse();
         System.out.println( "JCI events: " + parser.getEvents().size() );
