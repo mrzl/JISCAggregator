@@ -2,8 +2,15 @@ JISC Aggregator
 ===============
 readme, maybe?
 
+Todo
+----
+[ ] reflect about scalability
+[ ] write sufficient amount of tests
+
 Dependencies
 ------------
+All dependencies are handled via Maven.
+
 - Java 1.8
 - JUnit 4.4
 - Apache Commons Lang 3.1
@@ -13,7 +20,22 @@ Dependencies
 
 Tests
 -----
+All tests are contained in the src/test/java package.
 
+Test cover the following entities:
+- [ ] network connection
+- [ ] possibility to create the webserver
+- [ ] html page creation
+- [ ] each parser
+- [ ] all classes should be tested in general
+
+Scalability
+-----------
+
+
+Author
+------
+Marcel Schwittlick - marcel.schwittlick@gmail.com
 
 License
 -------
