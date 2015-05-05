@@ -4,8 +4,8 @@ readme, maybe?
 
 Todo
 ----
-[ ] reflect about scalability
-[ ] write sufficient amount of tests
+- [ ] reflect about scalability
+- [ ] write sufficient amount of tests
 
 Dependencies
 ------------
@@ -23,7 +23,7 @@ Tests
 All tests are contained in the src/test/java package.
 
 Test cover the following entities:
-- [ ] network connection
+- [x] network connection
 - [ ] possibility to create the webserver
 - [ ] html page creation
 - [ ] each parser

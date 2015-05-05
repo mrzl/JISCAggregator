@@ -1,6 +1,5 @@
 package html;
 
-import jisc.event.EventSource;
 import jisc.input.html.JciEventsHtmlParser;
 import jisc.input.html.RoyalAcademyHtmlParser;
 import jisc.input.rss.NetworkingEventsLondonRssParser;
