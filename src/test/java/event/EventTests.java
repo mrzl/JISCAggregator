@@ -19,7 +19,7 @@ public class EventTests {
         boolean titleRight = event.getTitle() == "title" ? true : false;
         boolean descRight = event.getDescription( ) == "desc" ? true : false;
         boolean urlRight = event.getUrl( ) == "url11" ? true : false;
-        boolean dateRight = event.getDate( ) == date.toString() ? true : false;
+        boolean dateRight = event.getDate( ).equals( date.toString() ) ? true : false;
         boolean authorRight = event.getAuthor( ) == "author" ? true : false;
 
         assertTrue( titleRight && descRight && urlRight && dateRight && authorRight );
