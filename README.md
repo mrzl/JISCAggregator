@@ -4,9 +4,9 @@ In order to run the thing, open the JISCAggreagot.iml with IntelliJ IDEA, compil
 no deployment/build setup is being taken care of. This is an working prototype, no production software.
 
 What this software essentially does at this point is to collect all events from the three sources:
-1. JCI London - http://www.jcilondon.org.uk/events/
-2. Networkingevents London - http://www.findnetworkingevents.com/events/index.cfm?action=eventslist&towncity=London
-3. Royal Academy of Arts - https://www.royalacademy.org.uk/exhibitions-and-events#events-index
+* JCI London - http://www.jcilondon.org.uk/events/
+* Networkingevents London - http://www.findnetworkingevents.com/events/index.cfm?action=eventslist&towncity=London
+* Royal Academy of Arts - https://www.royalacademy.org.uk/exhibitions-and-events#events-index
 
 Internally all events of these sources are being unified into one data structure that treats all events equally- it 
 unifies them in one system, that can potentially be searched and makes it easier to find events that are interesting
