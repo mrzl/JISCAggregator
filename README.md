@@ -35,10 +35,6 @@ Maven mependencies:
 - Rendersnake 1.8
 - SparkJava 2.1
 
-Tests
------
-All tests are contained in the src/test/java package.
-
 Scalability
 -----------
 Additional sources of events can be integrated easily, as the structure of the software allows to simply extend the
@@ -63,6 +59,10 @@ interface and criteria to access the database. It's out of scope from the goal o
 ##### Legal issues
 For the sake of reliability of the service, it would be advised to contact the sources that are being aggregated and 
 ask for their official permission and possible collaboration.
+
+Tests
+-----
+All tests are contained in the src/test/java package.
 
 Author
 ------
