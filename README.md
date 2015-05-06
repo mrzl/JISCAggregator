@@ -1,6 +1,6 @@
 JISC Aggregator
 ===============
-In order to run the thing, open the JISCAggreagot.iml with IntelliJ IDEA, compile and run. At this stage of the project
+In order to run the thing, open the JISCAggregator.iml with IntelliJ IDEA, compile and run. At this stage of the project
 no deployment/build setup is being taken care of. This is an working prototype, no production software.
 
 What this software essentially does at this point is to collect all events from the three sources:
@@ -25,8 +25,9 @@ Todo
 
 Dependencies
 ------------
-All dependencies are handled via Maven.
+Tested under Windows 8.1 and Ubuntu 14.04.
 
+Maven mependencies:
 - Java 1.8
 - JUnit 4.4
 - Apache Commons Lang 3.1
@@ -37,13 +38,6 @@ All dependencies are handled via Maven.
 Tests
 -----
 All tests are contained in the src/test/java package.
-
-Test cover the following entities:
-- [x] network connection
-- [x] possibility to create the webserver
-- [x] html page creation
-- [x] each parser
-- [x] all classes should be tested in general
 
 Scalability
 -----------
