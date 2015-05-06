@@ -18,6 +18,7 @@ public class Event {
      * @param _title the title of the event
      * @param _description a small description of the event
      * @param _url the url to the event
+     * @param _date the date when the event will happen
      * @param _author the author of the event
      */
     public Event( String _title, String _description, String _url, String _date, String _author ) {

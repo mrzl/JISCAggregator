@@ -24,9 +24,9 @@ All tests are contained in the src/test/java package.
 
 Test cover the following entities:
 - [x] network connection
-- [ ] possibility to create the webserver
-- [ ] html page creation
-- [ ] each parser
+- [x] possibility to create the webserver
+- [x] html page creation
+- [x] each parser
 - [ ] all classes should be tested in general
 
 Scalability

@@ -16,6 +16,8 @@ public class Parser {
 
     /**
      * All parsers have a list which contain their parsed events
+     *
+     * @param _eventSource the source of the events
      */
     public Parser ( EventSource _eventSource ) {
         this.events = new ArrayList<>( );

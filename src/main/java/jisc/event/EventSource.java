@@ -5,6 +5,8 @@ package jisc.event;
  *
  * An instance of this class represents a source for events. Most likely being an external website/service that has
  * a database of events happening. For every source of events only one instance of this class should be created.
+ *
+ * DAO- no need for testing and logging
  */
 public class EventSource {
     private String prettyName;

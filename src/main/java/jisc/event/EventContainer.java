@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 /**
  * Created by mrzl on 13.04.2015.
- * <p>
- * The @link{jisc.event.EventContainer} is the main container for all events. This is where all events are collected
- * in relation to their @link{jisc.general.EventOrigin}.
+
+ * The {@link jisc.event.EventContainer} is the main container for all events. This is where all events are collected
+ * in relation to their {@link jisc.event.EventSource}.
  */
 public class EventContainer {
     private static final Logger logger = Logger.getLogger( EventContainer.class.getName( ) );
@@ -19,6 +19,13 @@ public class EventContainer {
      */
     public EventContainer () {
         this.events = new HashMap<>( );
+    }
+
+    /**
+     * Clears all saved events.
+     */
+    public void clear() {
+        this.events.clear();
     }
 
     /**
@@ -77,7 +84,6 @@ public class EventContainer {
         Iterator it = this.events.entrySet( ).iterator( );
         while ( it.hasNext( ) ) {
             Map.Entry pair = ( Map.Entry ) it.next( );
-            System.out.println( pair.getKey( ) + " = " + pair.getValue( ) );
             _events.addAll( ( Collection< ? extends Event > ) pair.getValue() );
         }
 
@@ -87,7 +93,7 @@ public class EventContainer {
     /**
      * @return Returns a List of all origins known to the container
      */
-    public List< EventSource > getOrigins () {
-        return events.keySet( ).stream( ).collect( Collectors.toList( ) );
+    public List< EventSource > getEventSources () {
+        return this.events.keySet( ).stream( ).collect( Collectors.toList( ) );
     }
 }

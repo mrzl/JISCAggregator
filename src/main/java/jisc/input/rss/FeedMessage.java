@@ -5,16 +5,17 @@ import java.util.Date;
 /**
  * Created by mrzl on 13.04.2015.
  *
- * An instance of this object contains all information that was retrieved about one RSS feed
+ * An instance of this object contains all information that was retrieved about one RSS feed.
+ * DAO- no need for testing and logging
  */
 public class FeedMessage {
 
-    String title;
-    String description;
-    String link;
-    String author;
-    String guid;
-    Date date;
+    private String title;
+    private String description;
+    private String link;
+    private String author;
+    private String guid;
+    private Date date;
 
     public String getTitle() {
         return title;
@@ -66,8 +67,8 @@ public class FeedMessage {
 
     @Override
     public String toString() {
-        return "FeedMessage [title=" + title + ", description=" + description
-                + ", link=" + link + ", author=" + author + ", date: " + date + ", guid=" + guid
+        return "FeedMessage [title=" + getTitle() + ", description=" + getDescription()
+                + ", link=" + getLink() + ", author=" + getAuthor() + ", date: " + getDate() + ", guid=" + getGuid()
                 + "]";
     }
 }
