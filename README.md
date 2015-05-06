@@ -3,7 +3,7 @@ JISC Aggregator
 In order to run the thing, open the JISCAggregator.iml with IntelliJ IDEA, compile and run. At this stage of the project
 no deployment/build setup is being taken care of. This is an working prototype, no production software.
 
-What this software essentially does at this point is to collect all events from the three sources:
+What this software essentially does at this point is to collect all events from the three sources independently:
 * JCI London - http://www.jcilondon.org.uk/events/
 * Networkingevents London - http://www.findnetworkingevents.com/events/index.cfm?action=eventslist&towncity=London
 * Royal Academy of Arts - https://www.royalacademy.org.uk/exhibitions-and-events#events-index
@@ -67,6 +67,7 @@ All tests are contained in the src/test/java package.
 Author
 ------
 Marcel Schwittlick
+
 marcel.schwittlick@gmail.com
 
 License

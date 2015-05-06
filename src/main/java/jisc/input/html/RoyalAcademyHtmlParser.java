@@ -20,6 +20,12 @@ import java.util.logging.Logger;
 
 /**
  * Created by mrzl on 26.04.2015.
+ *
+ * This parses the events being listed on the Royal Academy of Arts London event page
+ * https://www.royalacademy.org.uk/exhibitions-and-events#events-index
+ *
+ * The parsing of the html page is pretty much along the lines of how the Royal Academy website
+ * is constructed. Meaning, if the structure of their site changes, this module needs to be adjusted accordingly.
  */
 public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
 
@@ -41,10 +47,17 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
     private final String RELATED_EVENTS_TYPE_ELEMENT = "h5.event-type";
     private final String RELATED_EVENTS_LOCATION_ELEMENT = "p.event-location";
 
+    /**
+     * Extending the Parser with a custom {@link jisc.event.EventSource}
+     */
     public RoyalAcademyHtmlParser () {
         super( new EventSource( "Royal Academy London", "https://www.royalacademy.org.uk/exhibitions-and-events#events-index" ) );
     }
 
+    /**
+     * Parses the entire website for possible events. As of speaking 06.05.2015 there are two main event categories that
+     * can be parsed. Top Events and related events.
+     */
     public void parse () {
         String eventSourceUrl = super.eventSource.getUrl( );
         try {
@@ -68,6 +81,11 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
         }
     }
 
+    /**
+     * Parsing the top events.
+     * @param _rootDocument
+     * @return
+     */
     private ArrayList< Event > parseTopEvents( Document _rootDocument ) {
         ArrayList< Event > _events = new ArrayList<>();
 
@@ -95,6 +113,12 @@ public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
         return _events;
     }
 
+    /**
+     * parses the related events.
+     *
+     * @param _rootDocument
+     * @return
+     */
     private ArrayList< Event > parseRelatedEvents( Document _rootDocument ) {
         ArrayList< Event > _events = new ArrayList<>();
 
