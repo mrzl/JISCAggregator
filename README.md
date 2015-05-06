@@ -5,6 +5,9 @@ no deployment/build setup is being taken care of. This is an working prototype, 
 
 Once the web server is running, you can access all aggregated events at http://localhost:4567/
 
+If you just want to see the output of this prototype download and open this website with your browser.
+https://github.com/mrzl/JISCAggregator/releases/download/v0.01a/06052015.zip
+
 Todo
 ----
 - [ ] reflect about scalability
@@ -35,15 +38,18 @@ Test cover the following entities:
 Scalability
 -----------
 Additional sources of events can be integrated easily, as the structure of the software allows to simply extend the
-Parser interface, which gives the base structure for adding hundreds of even sources. The problem really lies in two aspects:
+Parser interface, which gives the base structure for adding hundreds of even sources. 
 
-1. When the data of events is saved in a database and the software updates the database on a specific interval, it is
+### Persistency
+hen the data of events is saved in a database and the software updates the database on a specific interval, it is
 important develop a good system to manage old/outdated and new events.
-2. The more event sources are added, the more needs to be maintained. Imagining the future, where dozens of sources
+
+### Maintenance
+The more event sources are added, the more needs to be maintained. Imagining the future, where dozens of sources
 are being scraped for events, some websites change their feed. This can be easily detected via the tests provided in this
 version of the software already, though this is something to keep in mind, as the cost of keeping the system running
 will raise in relation to the amount of sources which are being aggregated. With forward thinking software design
-and rock solid testing this maintanance effort can be kept very low.
+and rock solid testing this maintenance effort can be kept very low.
 
 Author
 ------
