@@ -47,8 +47,8 @@ public class EventContainer {
     /**
      * Adds multiple events
      *
-     * @param _events a @link{java.util.ArrayList} that contains the events being added
-     * @param _origin the @link[jisc.event.EventSource} the events are in relation to
+     * @param _events a {@link java.util.ArrayList} that contains the events being added
+     * @param _origin the {@link jisc.event.EventSource} the events are in relation to
      */
     public void addEvents ( ArrayList< Event > _events, EventSource _origin ) {
         this.logger.entering( getClass( ).getName( ), "addEvents" );

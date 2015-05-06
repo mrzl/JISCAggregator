@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertTrue;
 
 /**
+ * Tests the network status of the machine this is run on and of the sources.
  */
 public class NetworkTest {
 
