@@ -3,7 +3,7 @@ JISC Aggregator
 In order to run the thing, open the JISCAggreagot.iml with IntelliJ IDEA, compile and run. At this stage of the project
 no deployment/build setup is being taken care of. This is an working prototype, no production software.
 
-Once the web server is running, you can access all aggregated events at http://localhost:45678/
+Once the web server is running, you can access all aggregated events at http://localhost:4567/
 
 Todo
 ----
