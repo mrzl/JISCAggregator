@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.*;
 
 /**
- * Created by mrzl on 24.04.2015.
+ * A collection of helper methods to perform small, global tasks.
  */
 public class HelperMethods {
 
@@ -50,6 +50,7 @@ public class HelperMethods {
      * @param _container the container that contains all events that are being printed
      * @param _source only events who are associated to this @link{just.event.EventSource} are printed
      */
+    @SuppressWarnings( "unused" )
     public static void printEvents( EventContainer _container, EventSource _source ) {
         System.out.println( "Events of " + _source );
         try {

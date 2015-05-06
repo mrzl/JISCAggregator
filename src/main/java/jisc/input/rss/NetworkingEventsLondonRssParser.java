@@ -26,12 +26,11 @@ import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
 
 /**
- * Created by mrzl on 13.04.2015.
+ *
  */
 public class NetworkingEventsLondonRssParser extends Parser implements ParserInterface {
 
     private static final Logger logger = Logger.getLogger( NetworkingEventsLondonRssParser.class.getName( ) );
-
 
     private static final String TITLE = "title";
     private static final String DESCRIPTION = "description";
@@ -47,6 +46,10 @@ public class NetworkingEventsLondonRssParser extends Parser implements ParserInt
     private URL url;
     private RssFeed currentRssFeed;
 
+
+    /**
+     * Extends the parses with a custom {@link jisc.event.EventSource}
+     */
     public NetworkingEventsLondonRssParser () {
         super( new EventSource( "Networking Events London", "http://feeds2.feedburner.com/Networking-Events-In-London" ) );
 
@@ -54,12 +57,14 @@ public class NetworkingEventsLondonRssParser extends Parser implements ParserInt
         try {
             this.url = new URL( super.eventSource.getUrl() );
         } catch ( MalformedURLException e ) {
-            this.logger.severe( "Couldn't construct a URL from this string: " + super.eventSource.getUrl() );
-            this.logger.severe( HelperMethods.getStackTraceFromException( e ) );
+            logger.severe( "Couldn't construct a URL from this string: " + super.eventSource.getUrl() );
+            logger.severe( HelperMethods.getStackTraceFromException( e ) );
         }
     }
 
-    @Override
+    /**
+     * Parses all events from that source.
+     */
     public void parse() {
         try {
             boolean isFeedHeader = true;
@@ -99,10 +104,7 @@ public class NetworkingEventsLondonRssParser extends Parser implements ParserInt
                             {
                                 String extractedDateString = matcher.group( 0 );
                                 try {
-                                    //System.out.println( title );
-                                    Date result = new SimpleDateFormat( "EEE dd MMM yyyy", Locale.ENGLISH ).parse( extractedDateString );
-                                    //System.out.println( "date parse: " + result );
-                                    date = result;
+                                    date = new SimpleDateFormat( "EEE dd MMM yyyy", Locale.ENGLISH ).parse( extractedDateString );
                                 } catch ( ParseException e ) {
                                     e.printStackTrace( );
                                 }

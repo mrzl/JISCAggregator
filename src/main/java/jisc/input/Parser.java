@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 /**
  * The base parser class for all parsers.
- *
- * Created by mrzl on 18.04.2015.
  */
 public class Parser {
     protected ArrayList< Event > events;

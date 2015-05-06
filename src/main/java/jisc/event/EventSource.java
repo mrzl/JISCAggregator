@@ -1,8 +1,6 @@
 package jisc.event;
 
 /**
- * Created by mrzl on 13.04.2015.
- *
  * An instance of this class represents a source for events. Most likely being an external website/service that has
  * a database of events happening. For every source of events only one instance of this class should be created.
  *

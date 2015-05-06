@@ -19,8 +19,6 @@ import java.util.Iterator;
 import java.util.logging.Logger;
 
 /**
- * Created by mrzl on 26.04.2015.
- *
  * This parses the events being listed on the Royal Academy of Arts London event page
  * https://www.royalacademy.org.uk/exhibitions-and-events#events-index
  *

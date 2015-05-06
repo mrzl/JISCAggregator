@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by mrzl on 13.04.2015.
- *
  * DAO- no need for testing and logging
  */
 public class RssFeed {

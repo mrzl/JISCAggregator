@@ -23,7 +23,9 @@ import java.util.Locale;
 import java.util.logging.Logger;
 
 /**
- * Created by mrzl on 15.04.2015.
+ * This parses the events from the JCI event page
+ * http://www.jcilondon.org.uk/events/
+ *
  */
 public class JciEventsHtmlParser extends Parser implements ParserInterface {
 
@@ -38,14 +40,14 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     private final String EVENT_PRICE_ELEMENT = "div.event_type_details tbody";
 
     /**
-     *
+     * Extends the parser with a custom {@link jisc.event.EventSource}
      */
     public JciEventsHtmlParser () {
         super( new EventSource( "JCI London", "http://www.jcilondon.org.uk/events/index.html" ) );
     }
 
     /**
-     *
+     * Parses all events.
      */
     @Override
     public void parse () {
@@ -78,7 +80,7 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     }
 
     /**
-     *
+     * Parses the collection of different information associated with one event
      *
      * @param _element
      * @return
@@ -95,9 +97,9 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     }
 
     /**
+     * Parses the event title.
      *
-     *
-     * @param _element
+     * @param _element the html element from which the title is being extracted from
      * @return
      */
     private String getEventTitle ( Element _element ){
@@ -116,9 +118,9 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     }
 
     /**
+     * Parses the event venue name.
      *
-     *
-     * @param _element
+     * @param _element the html element from which the venue is being extracted from
      * @return
      */
     private String getEventVenue ( Element _element ) {
@@ -137,9 +139,9 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     }
 
     /**
+     * Parses the event type.
      *
-     *
-     * @param _element
+     * @param _element the html element from which the type is being extracted from
      * @return
      */
     private String getEventType ( Element _element ) {
@@ -158,9 +160,9 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     }
 
     /**
+     * Parses the event url.
      *
-     *
-     * @param _element
+     * @param _element the html element from which the venue is being extracted from
      * @return
      */
     private String getEventUrl ( Element _element ) {
@@ -186,9 +188,9 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     }
 
     /**
+     * Parses the event date.
      *
-     *
-     * @param _element
+     * @param _element the html element from which the date is being extracted from
      * @return
      */
     private Date getEventDate ( Element _element ) {
@@ -208,9 +210,9 @@ public class JciEventsHtmlParser extends Parser implements ParserInterface {
     }
 
     /**
+     * Parses the price of an event ticket.
      *
-     *
-     * @param _element
+     * @param _element the html element from which the price is being extracted from
      * @return
      */
     private String getEventPrice ( Element _element ) {

@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
- * Created by mrzl on 04.05.2015.
+ * Creates a web server and constructs a html table containing all parsed events for convenient inspection
  */
 public class HtmlOutput {
 
@@ -30,7 +30,7 @@ public class HtmlOutput {
 
             HtmlCanvas html = new HtmlCanvas( );
             html.head( ).macros( ).stylesheet( "http://bersk.iapetus.feralhosting.com/table_style.css" )._head( );
-            HtmlCanvas htmlCanvas = null;
+            HtmlCanvas htmlCanvas = new HtmlCanvas();
             try {
                 htmlCanvas = html.div( org.rendersnake.HtmlAttributesFactory.class_( "datagrid" ) ).table( )
                         .thead( )
@@ -70,7 +70,7 @@ public class HtmlOutput {
                 logger.severe( HelperMethods.getStackTraceFromException( e ) );
             }
 
-            return htmlCanvas.toHtml( );
+            return htmlCanvas.toHtml();
         } );
     }
 }

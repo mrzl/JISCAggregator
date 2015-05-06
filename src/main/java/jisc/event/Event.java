@@ -1,8 +1,6 @@
 package jisc.event;
 
 /**
- * Created by mrzl on 13.04.2015.
- *
  * This class encapsulates all information regarding an event.
  */
 public class Event {

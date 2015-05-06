@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by mrzl on 15.04.2015.
+ * Tests all parses of the project.
  */
 public class ParserTests {
 

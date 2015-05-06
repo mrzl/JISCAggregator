@@ -11,10 +11,8 @@ import jisc.output.html.HtmlOutput;
 import java.util.logging.*;
 
 /**
- * Created by mrzl on 13.04.2015.
- * <p>
  * This is where the JISC Aggregator is started.
- * <p>
+ *
  * As of 03.05.2015 this aggregates all events publicly available at
  * 1. JCI London - http://www.jciuk.org.uk/events/
  * 2. Royal Academy of Arts London - https://www.royalacademy.org.uk/exhibitions-and-events#events-index

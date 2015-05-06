@@ -3,6 +3,7 @@ import jisc.input.html.JciEventsHtmlParser;
 import jisc.input.html.RoyalAcademyHtmlParser;
 import jisc.input.rss.NetworkingEventsLondonRssParser;
 import jisc.output.html.HtmlOutput;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,45 +14,44 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by mrzl on 05.05.2015.
  */
 public class NetworkTest {
 
-    @org.junit.Test
+    @Test
     public void testGeneralNetworkConnection () throws MalformedURLException {
         URL url = new URL( "http://www.google.com" );
         boolean isConnected = NetworkTest.isAddressReachable( url );
         assertTrue( "Checking for general internet connection", isConnected );
     }
 
-    @org.junit.Test
+    @Test
     public void testNetworkEventsLondonReachabilityTest () throws MalformedURLException {
         NetworkingEventsLondonRssParser nel = new NetworkingEventsLondonRssParser( );
         URL url = new URL( nel.getEventSource( ).getUrl( ) );
         assertTrue( NetworkTest.isAddressReachable( url ) );
     }
 
-    @org.junit.Test
+    @Test
     public void testJciReachabilityTest () throws MalformedURLException {
         JciEventsHtmlParser jci = new JciEventsHtmlParser( );
         URL url = new URL( jci.getEventSource( ).getUrl( ) );
         assertTrue( NetworkTest.isAddressReachable( url ) );
     }
 
-    @org.junit.Test
+    @Test
     public void testRoyalAcademyReachabilityTest () throws MalformedURLException {
         RoyalAcademyHtmlParser ra = new RoyalAcademyHtmlParser( );
         URL url = new URL( ra.getEventSource( ).getUrl( ) );
         assertTrue( NetworkTest.isAddressReachable( url ) );
     }
 
-    @org.junit.Test
+    @Test
     public void localhostWebserverTest () throws MalformedURLException {
         new HtmlOutput( new EventContainer( ) );
         assertTrue( NetworkTest.isWebserverReachable( new URL( "http://localhost:4567" ) ) );
     }
 
-    @org.junit.Test
+    @Test
     public void isHtmlValid() throws IOException {
         new HtmlOutput( new EventContainer() );
 
@@ -66,8 +66,8 @@ public class NetworkTest {
      * Opens a connection to the passed url. If the connection is possible,
      * the host is online and you are connected to the internet.
      *
-     * @param _url
-     * @return
+     * @param _url the URL to the website that is being checked
+     * @return boolean weather the address is reachable or not
      */
     private static boolean isAddressReachable ( final URL _url ) {
         try {
@@ -81,9 +81,10 @@ public class NetworkTest {
     }
 
     /**
-     * Opens the passed url and tests if the localhost webserver responds positive
-     * @param _url
-     * @return
+     * Opens the passed url and tests if the localhost web server responds positive
+     *
+     * @param _url the URL to the website that is being checked
+     * @return boolean weather the address is reachable or not
      */
     private static boolean isWebserverReachable ( final URL _url ) {
         if ( !isAddressReachable( _url ) ) {
@@ -114,8 +115,8 @@ public class NetworkTest {
      * not worth it, as the html table output is really only for the first stage
      * presentation of the prototype.
      *
-     * @param _url
-     * @return
+     * @param _url the URL to the website that is being checked
+     * @return boolean weather the table is present on the passed web server
      * @throws IOException
      */
     private static boolean isTablePresent( final URL _url ) throws IOException {

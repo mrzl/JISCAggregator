@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by mrzl on 05.05.2015.
  */
 public class EventContainerTest {
 

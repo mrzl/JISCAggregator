@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
- * Created by mrzl on 13.04.2015.
-
  * The {@link jisc.event.EventContainer} is the main container for all events. This is where all events are collected
  * in relation to their {@link jisc.event.EventSource}.
  */
