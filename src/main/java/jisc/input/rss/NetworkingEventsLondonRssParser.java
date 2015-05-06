@@ -45,12 +45,12 @@ public class NetworkingEventsLondonRssParser extends Parser implements ParserInt
     private static final String GUID = "guid";
 
     private URL url;
-    private Feed currentFeed;
+    private RssFeed currentRssFeed;
 
     public NetworkingEventsLondonRssParser () {
         super( new EventSource( "Networking Events London", "http://feeds2.feedburner.com/Networking-Events-In-London" ) );
 
-        this.currentFeed = null;
+        this.currentRssFeed = null;
         try {
             this.url = new URL( super.eventSource.getUrl() );
         } catch ( MalformedURLException e ) {
@@ -85,7 +85,7 @@ public class NetworkingEventsLondonRssParser extends Parser implements ParserInt
                             if ( isFeedHeader ) {
                                 isFeedHeader = false;
 
-                                currentFeed = new Feed( title, link, description, language,
+                                currentRssFeed = new RssFeed( title, link, description, language,
                                         copyright, pubdate );
                             }
                             event = eventReader.nextEvent( );
@@ -133,14 +133,14 @@ public class NetworkingEventsLondonRssParser extends Parser implements ParserInt
                     }
                 } else if ( event.isEndElement( ) ) {
                     if ( event.asEndElement( ).getName( ).getLocalPart( ) == ( ITEM ) ) {
-                        FeedMessage message = new FeedMessage( );
+                        RssFeedMessage message = new RssFeedMessage( );
                         message.setAuthor( author );
                         message.setDescription( description );
                         message.setGuid( guid );
                         message.setLink( link );
                         message.setTitle( title );
                         message.setDate( date );
-                        currentFeed.getMessages( ).add( message );
+                        currentRssFeed.add( message );
                         event = eventReader.nextEvent( );
                         continue;
                     }
@@ -151,7 +151,7 @@ public class NetworkingEventsLondonRssParser extends Parser implements ParserInt
             throw new RuntimeException( e );
         }
 
-        for( FeedMessage m : this.currentFeed.getMessages( ) ) {
+        for( RssFeedMessage m : this.currentRssFeed.getMessages( ) ) {
             String _date = parseDateFromTitle( m.getTitle() );
 
             String title = m.getTitle().substring( 0, getIndexOfDateStart( m.getTitle() ) - 2 );

@@ -5,8 +5,10 @@ import java.util.List;
 
 /**
  * Created by mrzl on 13.04.2015.
+ *
+ * DAO- no need for testing and logging
  */
-public class Feed {
+public class RssFeed {
 
     private String title;
     private String link;
@@ -14,10 +16,12 @@ public class Feed {
     private String language;
     private String copyright;
     private String pubDate;
-    private List< FeedMessage > entries = new ArrayList<>( );
+    private List< RssFeedMessage > entries;
 
-    public Feed ( String title, String link, String description, String language,
-                  String copyright, String pubDate ) {
+    public RssFeed ( String title, String link, String description, String language,
+                     String copyright, String pubDate ) {
+
+        this.entries = new ArrayList<>();
         this.title = title;
         this.link = link;
         this.description = description;
@@ -26,7 +30,11 @@ public class Feed {
         this.pubDate = pubDate;
     }
 
-    public List< FeedMessage > getMessages () {
+    public void add( RssFeedMessage _message ) {
+        this.entries.add( _message );
+    }
+
+    public List< RssFeedMessage > getMessages () {
         return entries;
     }
 

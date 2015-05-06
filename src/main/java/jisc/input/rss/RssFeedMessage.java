@@ -8,7 +8,7 @@ import java.util.Date;
  * An instance of this object contains all information that was retrieved about one RSS feed.
  * DAO- no need for testing and logging
  */
-public class FeedMessage {
+public class RssFeedMessage {
 
     private String title;
     private String description;
