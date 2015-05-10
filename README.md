@@ -5,7 +5,7 @@ no deployment/build setup is being taken care of. This is an working prototype, 
 
 What this software essentially does at this point is to collect all events from the three sources independently:
 * JCI London - http://www.jcilondon.org.uk/events/
-* Networkingevents London - http://www.findnetworkingevents.com/events/index.cfm?action=eventslist&towncity=London
+* Networking Events London - http://www.findnetworkingevents.com/events/index.cfm?action=eventslist&towncity=London
 * Royal Academy of Arts - https://www.royalacademy.org.uk/exhibitions-and-events#events-index
 
 Internally all events of these sources are being unified into one data structure that treats all events equally- it 
@@ -38,19 +38,21 @@ Maven mependencies:
 Scalability
 -----------
 Additional sources of events can be integrated easily, as the structure of the software allows to simply extend the
-Parser interface, which gives the base structure for adding hundreds of sources. 
+Parser interface, which gives the base structure for adding hundreds of sources.
 
 ##### Persistency
-At this point there is no proper persistent backup of the aggregated event entries.
+At this point there is no proper persistent backup of the aggregated event entries, as it turned out to be a very
+sensitive task, that can not be satisfiable achieved in the time frame for this prototype.
 When the data of events is saved in a database and the software updates the database on a specific interval, it is
-important develop a good system to manage old/outdated and new events.
+important to develop a system to manage outdated and new events.
 
 ##### Maintenance
 The more event sources are added, the more needs to be maintained. Imagining the future, where dozens of sources
-are being scraped for events, some websites change their feed. This can be easily detected via the tests provided in this
-version of the software already, though this is something to keep in mind, as the cost of keeping the system running
-will raise in relation to the amount of sources which are being aggregated. With forward thinking software design
-and rock solid testing this maintenance effort can be kept very low.
+are being scraped for events, some websites change their feed, which make the aggregator fail to retrieve events
+from this particular source. This can be easily detected via the tests provided in this version of the software 
+already, though this is something to keep in mind, as the cost of keeping the system running will raise in 
+relation to the amount of sources which are being aggregated. With forward thinking software design and 
+rock solid testing this maintenance effort can be kept very low.
 
 ##### Searchability
 The existing structure opens up the possibility to search the database. This requires actions like developing a user
