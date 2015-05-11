@@ -42,9 +42,9 @@ Parser interface, which gives the base structure for adding hundreds of sources.
 
 ##### Persistency
 At this point, the persistency of the aggregated events, is being kept on a very minimal level, the events are simply exported into a html page for display. Creating a proper persistent system that stores events in a database, the future of this project needs to be sketched out with more detail. Storing data over and over again in a database turned out to be a sensitive task that went out of scope of this prototype. Some of the problems of keeping an database of aggregated events up to date are sketchd out in the following:
-1. Whenever the databse is being 'refreshed' ( meaning, all sources are being aggregated for new events ) the current state of the database needs to be compared with the 'new' event set, skipping duplicates.
-2. While skipping duplicates is important, but at the same time, possible updates of the events need to be integrated into the excisting event instance. This merge of data is highly sensitive and needs to be tested extensively.
-3. The databse system needs to be flexible in order to add more fields of information for each event type and be fast to access/write.
+* Whenever the databse is being 'refreshed' ( meaning, all sources are being aggregated for new events ) the current state of the database needs to be compared with the 'new' event set, skipping duplicates.
+* While skipping duplicates is important, but at the same time, possible updates of the events need to be integrated into the excisting event instance. This merge of data is highly sensitive and needs to be tested extensively.
+* The databse system needs to be flexible in order to add more fields of information for each event type and be fast to access/write.
 
 ##### Maintenance
 The more event sources are added, the more needs to be maintained. Imagining the future, where dozens of sources
