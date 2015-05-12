@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * The base parser class for all parsers.
  */
-public class Parser {
+public abstract class Parser {
     protected ArrayList< Event > events;
     protected EventSource eventSource;
 
@@ -35,4 +35,6 @@ public class Parser {
     public ArrayList< Event > getEvents () {
         return this.events;
     }
+
+    public abstract void parse();
 }
