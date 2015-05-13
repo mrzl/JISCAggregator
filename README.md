@@ -1,12 +1,17 @@
 JISC Aggregator
 ===============
-In order to run the thing, open the JISCAggregator.iml with IntelliJ IDEA, compile and run. At this stage of the project
-no deployment/build setup is being taken care of. This is an working prototype, no production software.
 
-What this software essentially does at this point is to collect all events from the three sources independently:
+This is the repository of the JISC Aggregator, a tool to aggregate and scape websites that list informations about events. What this software does is essentially to collect all events from these three sources independently:
 * JCI London - http://www.jcilondon.org.uk/events/
 * Networking Events London - http://www.findnetworkingevents.com/events/index.cfm?action=eventslist&towncity=London
 * Royal Academy of Arts - https://www.royalacademy.org.uk/exhibitions-and-events#events-index
+
+Setup
+-----
+Whoever wants to execute this, be warned, this is a proof of concept and nowhere near the state of production quality. That means this should neither be deployed, nor used for commercial purposes, yet.
+
+In order to run the thing, open the JISCAggregator.iml with IntelliJ IDEA, compile and run. At this stage of the project
+no deployment/build setup is being taken care of. This is an working prototype, no production software.
 
 Internally all events of these sources are being unified into one data structure that treats all events equally- it 
 unifies them in one system, that can potentially be searched and makes it easier to find events that are interesting
@@ -14,20 +19,17 @@ to you.
 
 Once the web server is running, you can access all aggregated events at http://localhost:4567/
 
+#### Shortcut
+
 If you just want to see the output of this prototype download and open this website with your browser.
 https://github.com/mrzl/JISCAggregator/releases/download/v0.01a/06052015.zip
 
-Todo
-----
-- [x] reflect about scalability
-- [x] write sufficient amount of tests
-- [ ] re-read the scalability section
 
 Dependencies
 ------------
 Tested under Windows 8.1 and Ubuntu 14.04.
 
-Maven mependencies:
+Maven dependencies:
 - Java 1.8
 - JUnit 4.4
 - Apache Commons Lang 3.1
