@@ -74,6 +74,7 @@ All tests are contained in the src/test/java package.
 Authors
 ------
 Project Manager: Carl Smith - c.smith@rave.ac.uk
+
 Developer: Marcel Schwittlick - marcel.schwittlick@gmail.com
 
 License
