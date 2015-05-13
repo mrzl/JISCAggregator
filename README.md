@@ -67,7 +67,8 @@ For next iterations of this project a working infrastructure to deploy should be
 ##### Flexiblity
 Another possible branch of development would be to create a system for other, similar aggregation methods. Collection data of other kinds, and summarize them in one database. This can be information about literally anything, like e.g. the entries of various blogs. Another use case could be to aggregate sites like book or record release shops.
 
-##### Next Steps
+Next Steps
+----------
 The probably most reasonable next steps would be a combination of the following tasks:
 * Aggregate a few more sources
 * Store data persistent (+ manage event merges)
