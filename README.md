@@ -24,8 +24,7 @@ If you just want to see the output of this prototype download and open this webs
 https://github.com/mrzl/JISCAggregator/releases/download/v0.01a/06052015.zip
 
 
-Dependencies
-------------
+#### Dependencies
 Tested under Windows 8.1 and Ubuntu 14.04.
 
 Maven dependencies:
