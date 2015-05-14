@@ -20,7 +20,7 @@ import java.util.logging.*;
  * 1. JCI London - http://www.jciuk.org.uk/events/
  * 2. Royal Academy of Arts London - https://www.royalacademy.org.uk/exhibitions-and-events#events-index
  * 3. Networking Events London - http://www.findnetworkingevents.com/in/central-london/
- * 
+ *
  */
 public class Main {
     public static void main ( String[] args ) {
@@ -41,7 +41,7 @@ public class Main {
 
         // prints all events parsed
         for( Parser p : sources ) {
-            HelperMethods.printEvents( container, p );
+            HelperMethods.printEvents( container, p.getEventSource() );
         }
 
         // starts the web server and populates a html table with all events inside the container

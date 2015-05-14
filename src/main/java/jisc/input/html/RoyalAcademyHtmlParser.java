@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * The parsing of the html page is pretty much along the lines of how the Royal Academy website
  * is constructed. Meaning, if the structure of their site changes, this module needs to be adjusted accordingly.
  */
-public class RoyalAcademyHtmlParser extends Parser implements ParserInterface {
+public class RoyalAcademyHtmlParser extends Parser{
 
     private static final Logger logger = Logger.getLogger( RoyalAcademyHtmlParser.class.getName( ) );
 

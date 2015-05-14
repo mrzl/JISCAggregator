@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  * http://www.jcilondon.org.uk/events/
  *
  */
-public class JciEventsHtmlParser extends Parser implements ParserInterface {
+public class JciEventsHtmlParser extends Parser {
 
     private static final Logger logger = Logger.getLogger( JciEventsHtmlParser.class.getName( ) );
 

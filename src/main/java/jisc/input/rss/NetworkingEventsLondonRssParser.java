@@ -28,7 +28,7 @@ import javax.xml.stream.events.XMLEvent;
 /**
  *
  */
-public class NetworkingEventsLondonRssParser extends Parser implements ParserInterface {
+public class NetworkingEventsLondonRssParser extends Parser {
 
     private static final Logger logger = Logger.getLogger( NetworkingEventsLondonRssParser.class.getName( ) );
 
