@@ -1,16 +1,16 @@
 JISC Aggregator
 ===============
 
-This is the repository of the JISC Aggregator, a tool to aggregate and scape websites that list informations about events. What this software does is essentially to collect all events from these three sources independently:
+This is the repository of the JISC Aggregator - A software tool that is designed to aggregate and scrape websites that list information about events. What this software does is collect all events from these three sources independently:
 * JCI London - http://www.jcilondon.org.uk/events/
 * Networking Events London - http://www.findnetworkingevents.com/events/index.cfm?action=eventslist&towncity=London
 * Royal Academy of Arts - https://www.royalacademy.org.uk/exhibitions-and-events#events-index
 
 Setup
 -----
-Whoever wants to execute this, be warned, this is a proof of concept and nowhere near the state of production quality. That means this should neither be deployed, nor used for commercial purposes, yet.
+This is a proof of concept that should neither be deployed or used for commercial purposes at this stage.
 
-In order to run the thing anyways, open the JISCAggregator.iml with IntelliJ IDEA (https://www.jetbrains.com/idea/), compile and run. Again, at this stage of the project no deployment/build setup has been taken care of.
+In order to run the project open the JISCAggregator.iml with IntelliJ IDEA (https://www.jetbrains.com/idea/), compile and run. Again, at this stage of the project no deployment/build setup has been taken care of.
 
 Once the web server is running, you can access all aggregated events at http://localhost:4567/
 
